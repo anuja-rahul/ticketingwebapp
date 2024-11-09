@@ -11,13 +11,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import Success from "./success";
 import Link from "next/link";
-import { Label } from "@components/ui/label";
+import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import ErrorFeedback from "./error";
+import { Button } from "./ui/button";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>
 
 const registerSchema = z.object({
-  name: z.string().min(5),
+  username: z.string().min(5),
   email: z.string().email(),
   password: z.string().min(5),
   role: z.enum(["vendor", "customer", "admin"]),
@@ -88,7 +90,23 @@ export function registerForm({ className, ...props }: UserAuthFormProps) {
               </small>
             )}
 
-            <Label htmlFor="password">password</Label>
+            <Label htmlFor="username">Username</Label>
+            <Input
+              id="username"
+              type="text"
+              placeholder="username"
+              autoCapitalize="none"
+              autoCorrect="off"
+              disabled={isLoading}
+              {...register("username")}
+            />
+            {formState.errors.username && (
+              <small className="text-red-600">
+                {formState.errors.username.message}
+              </small>
+            )}
+
+            <Label htmlFor="password">Password</Label>
             <Input
               id="password"
               type="password"
@@ -104,6 +122,11 @@ export function registerForm({ className, ...props }: UserAuthFormProps) {
               </small>
             )}
           </div>
+          <ErrorFeedback data={errors} />
+          <Button disabled={isLoading} type="submit">
+            {isLoading && "creating your account..."}
+            Register
+          </Button>
         </div>
       </form>
     </div>
