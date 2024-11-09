@@ -5,3 +5,5 @@ export const envScheme = zod.object({
 });
 
 export const envVar = envScheme.parse(process.env);
+
+// TODO: fix this
