@@ -3,6 +3,7 @@
 import { Navbar } from "../ui/navbar";
 import { ModeToggle } from "../mode-toggle";
 import { AvatarIcon } from "../Avatar";
+import Link from "next/link";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -14,7 +15,7 @@ export default function Layout({ children }: LayoutProps) {
       <div className="flex justify-center items-center">
         <div
           id="nav"
-          className="w-4/5 flex flex-row align-middle justify-between h-10 items-center p-7 pr-4 pl-2 rounded-3xl bg-slate-600"
+          className="w-4/5 flex flex-row align-middle justify-between h-10 items-center p-7 pr-4 pl-2 rounded-3xl bg-slate-500/60"
         >
           <Navbar />
           <div className="flex flex-row justify-end items-center w-1/4 h-full">
@@ -25,9 +26,12 @@ export default function Layout({ children }: LayoutProps) {
               height={30}
               className="mx-4"
             /> */}
-            <AvatarIcon/>
+            <Link href={"/user"}>
+              <div className="flex items-center justify-center scale-90 hover:scale-95 duration-500">
+                <AvatarIcon />
+              </div>
+            </Link>
             <ModeToggle />
-          
           </div>
         </div>
       </div>

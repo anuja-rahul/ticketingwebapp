@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Logo from "./../../assets/images/logo.png";
+import Image1 from "./../../assets/images/image1.webp";
 
 import { cn } from "@/lib/utils";
 // import { Icons } from "@/components/icons";
@@ -31,40 +32,41 @@ const components: { title: string; href: string; description: string }[] = [
       "Looking for a place to sell your tickets ? TicketingApp is the right place for you.",
   },
   {
-    title: "Progress",
-    href: "/docs/primitives/progress",
+    title: "Dashboard",
+    href: "/dashboard",
     description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+      "get the latest staistics about our platform.",
   },
   {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
+    title: "Profile",
+    href: "/user",
+    description: "want to checkout your profile ?",
   },
   {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
+    title: "Vendors",
+    href: "/vendors",
     description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      "View a summerized preview of all our vendors.",
   },
   {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
+    title: "Home",
+    href: "/",
     description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+      "Feeling lost ? Get back to home.",
   },
 ];
 
 export function Navbar() {
   return (
-      <NavigationMenu>
-        <Image
-              src={Logo}
-              alt="logo"
-              width={45}
-              height={45}
-              className="mr-8 ml-2"
-            />
+    <NavigationMenu>
+      <Image
+        src={Logo}
+        alt="logo"
+        width={45}
+        height={45}
+        className="mr-8 ml-2"
+      />
+
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
@@ -77,6 +79,7 @@ export function Navbar() {
                     href="/"
                   >
                     {/* <Icons.logo className="h-6 w-6" /> */}
+                    <Image src={Image1} alt="image1" className="rounded-xl"/>
                     <div className="mb-2 mt-4 text-lg font-medium">
                       TicketingApp
                     </div>
@@ -116,7 +119,11 @@ export function Navbar() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/docs" legacyBehavior passHref>
+          <Link
+            href="http://localhost:8080/swagger-ui/index.html#/"
+            legacyBehavior
+            passHref
+          >
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Documentation
             </NavigationMenuLink>
