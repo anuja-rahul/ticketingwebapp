@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { envVar } from './env'
+// import { envVar } from './env'
 
 const defaultHeaders = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -9,7 +9,7 @@ const defaultHeaders = {
 
 export const createHttpClient = (additionalHeaders = {}) => {
   return Axios.create({
-    baseURL: envVar.API_URL,
+    baseURL: "http://localhost:8080/api",
     headers: {
       ...defaultHeaders,
       ...additionalHeaders

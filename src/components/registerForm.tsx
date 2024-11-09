@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import { z } from "zod";
@@ -16,10 +15,10 @@ import { Input } from "./ui/input";
 import ErrorFeedback from "./error";
 import { Button } from "./ui/button";
 
-type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>
+type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 const registerSchema = z.object({
-  username: z.string().min(5),
+  name: z.string().min(5),
   email: z.string().email(),
   password: z.string().min(5),
   role: z.enum(["vendor", "customer", "admin"]),
@@ -27,7 +26,7 @@ const registerSchema = z.object({
 
 type Schema = z.infer<typeof registerSchema>;
 
-export function registerForm({ className, ...props }: UserAuthFormProps) {
+export function RegisterForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [success, setSuccess] = React.useState<boolean>(false);
   const [errors, setErrors] = React.useState<HttpErrorResponse | undefined>(
@@ -45,8 +44,18 @@ export function registerForm({ className, ...props }: UserAuthFormProps) {
         setSuccess(true);
       })
       .catch((error) => {
-        const errordata = error.response.data as HttpErrorResponse;
-        setErrors(errordata);
+        if (error.response && error.response.data) {
+          const errordata = error.response.data as HttpErrorResponse;
+          setErrors(errordata);
+        } else {
+          setErrors({
+            message: "An unexpected error occurred",
+            status: 500,
+            errors: new Map(),
+            generalErrors: ["An unexpected error occurred"]
+          });
+          console.log(error)
+        }
       })
       .finally(() => {
         setIsLoading(false);
@@ -63,7 +72,7 @@ export function registerForm({ className, ...props }: UserAuthFormProps) {
       <Success
         show={success}
         message="Account created successfully"
-        description="Your details were veried and account created successfully"
+        description="Your details were verified and account created successfully"
         action={
           <Link href="/auth/login" className="underline">
             login
@@ -90,19 +99,19 @@ export function registerForm({ className, ...props }: UserAuthFormProps) {
               </small>
             )}
 
-            <Label htmlFor="username">Username</Label>
+            <Label htmlFor="name">Username</Label>
             <Input
-              id="username"
+              id="name"
               type="text"
               placeholder="username"
               autoCapitalize="none"
               autoCorrect="off"
               disabled={isLoading}
-              {...register("username")}
+              {...register("name")}
             />
-            {formState.errors.username && (
+            {formState.errors.name && (
               <small className="text-red-600">
-                {formState.errors.username.message}
+                {formState.errors.name.message}
               </small>
             )}
 
@@ -119,6 +128,26 @@ export function registerForm({ className, ...props }: UserAuthFormProps) {
             {formState.errors.password && (
               <small className="text-red-600">
                 {formState.errors.password.message}
+              </small>
+            )}
+
+            <Label htmlFor="role">Role</Label>
+            <select
+              id="role"
+              autoCapitalize="off"
+              autoCorrect="off"
+              disabled={isLoading}
+              {...register("role")}
+              className="block w-full mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            >
+              <option value="">Select role</option>
+              <option value="vendor">Vendor</option>
+              <option value="customer">Customer</option>
+              <option value="admin">Admin</option>
+            </select>
+            {formState.errors.role && (
+              <small className="text-red-600">
+                {formState.errors.role.message}
               </small>
             )}
           </div>
