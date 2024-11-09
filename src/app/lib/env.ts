@@ -1,7 +1,7 @@
 import zod from "zod";
 
-const envScheme = zod.object({
+export const envScheme = zod.object({
   API_URL: zod.string().min(1),
 });
 
-export const env = envScheme.parse(process.env);
+export const envVar = envScheme.parse(process.env);
