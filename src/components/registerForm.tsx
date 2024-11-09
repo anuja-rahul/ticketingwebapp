@@ -49,8 +49,8 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
           setErrors(errordata);
         } else {
           setErrors({
-            message: "An unexpected error occurred",
-            status: 500,
+            message: error.message,
+            status: error.response?.status || 500,
             errors: new Map(),
             generalErrors: ["An unexpected error occurred"]
           });
