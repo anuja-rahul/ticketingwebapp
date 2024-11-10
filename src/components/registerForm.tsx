@@ -157,7 +157,7 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
                 autoCorrect="off"
                 disabled={isLoading}
                 {...register("role")}
-                className="block w-full mt-1 bg-slate-950/80 border border-secondary rounded-lg shadow-sm focus:border-primary duration-200 p-2"
+                className="block w-full mt-1 bg-background border border-secondary rounded-lg shadow-sm focus:border-primary duration-200 p-2"
               >
                 <option>Select role</option>
                 <option value="vendor">Vendor</option>

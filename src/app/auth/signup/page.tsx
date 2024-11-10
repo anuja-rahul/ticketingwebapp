@@ -27,7 +27,7 @@ export default function Signup() {
       </BreadcrumbList>
     </Breadcrumb>
       <div className="flex flex-col items-center justify-center">
-      <h1 className="text-white text-4xl my-4 text-balance text-center font-bold">Register</h1>
+      <h1 className="text-foreground text-4xl my-4 text-balance text-center font-bold">Register</h1>
       <p className="mb-2">Register your account</p>
         <RegisterForm className="flex items-center justify-center w-3/5 h-auto bg-blue-950/30 py-6 rounded-[8rem] mt-1" />
       </div>
