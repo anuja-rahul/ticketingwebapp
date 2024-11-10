@@ -1,20 +1,21 @@
 "use client";
 
 import { z } from "zod";
-import React from "react";
-import { HttpErrorResponse } from "../app/models/http/HttpErrorResponse";
+import React, { useEffect } from "react";
+// import { HttpErrorResponse } from "../app/models/http/HttpErrorResponse";
 import { createHttpClient } from "@/app/lib/httpClient";
-import { toast } from "sonner";
+// import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
-import Success from "./success";
-import Link from "next/link";
+// import Success from "./success";
+// import Link from "next/link";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
-import ErrorFeedback from "./error";
+// import ErrorFeedback from "./error";
 import { Button } from "./ui/button";
 import LoginCard from "./loginCard";
+import { useToast } from "@/hooks/use-toast";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -30,38 +31,63 @@ type Schema = z.infer<typeof registerSchema>;
 export function RegisterForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [success, setSuccess] = React.useState<boolean>(false);
-  const [errors, setErrors] = React.useState<HttpErrorResponse | undefined>(
-    undefined
-  );
+  // const [errors, setErrors] = React.useState<HttpErrorResponse | undefined>(
+  //   undefined
+  // );
+  const { toast } = useToast();
 
   async function onSubmit(data: Schema) {
-    setErrors(undefined);
+    // setErrors(undefined);
     setSuccess(false);
     setIsLoading(true);
     createHttpClient()
       .post("/auth/register", data)
-      .then(() => {
-        toast.success("Account created successfully");
+      .then((response) => {
+        // testing for package return
+        console.log(response.data);
+        toast({
+          title:
+            "Account cretaed successfully : " +
+            new Date().toLocaleTimeString(),
+          description:
+            "Your details were verified and account created successfully",
+        });
         setSuccess(true);
       })
       .catch((error) => {
-        if (error.response && error.response.data) {
-          const errordata = error.response.data as HttpErrorResponse;
-          setErrors(errordata);
-        } else {
-          setErrors({
-            message: error.message,
-            status: error.response?.status || 500,
-            errors: new Map(),
-            generalErrors: ["An unexpected error occurred"],
-          });
-          console.log(error);
-        }
+        toast({
+          title:
+            "Error occured, please try again : " +
+            new Date().toLocaleTimeString(),
+          description:
+            error.message,
+        });
+        // if (error.response && error.response.data) {
+        //   const errordata = error.response.data as HttpErrorResponse;
+        //   setErrors(errordata);
+        // } else {
+        //   setErrors({
+        //     message: error.message,
+        //     status: error.response?.status || 500,
+        //     errors: new Map(),
+        //     generalErrors: ["An unexpected error occurred"],
+        //   });
+        //   console.log(error);
+        // }
       })
       .finally(() => {
         setIsLoading(false);
       });
   }
+
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 3000);
+    }
+  }, [success]);
+  
 
   const { register, handleSubmit, formState } = useForm<Schema>({
     resolver: zodResolver(registerSchema),
@@ -69,8 +95,8 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
   });
 
   return (
-    <div className={clsx("gap-6 w-screen flex flex-col", className)} {...props}>
-      <Success
+    <div className={clsx("gap-6 flex flex-col", className)} {...props}>
+      {/* <Success
         show={success}
         message="Account created successfully"
         description="Your details were verified and account created successfully"
@@ -79,7 +105,7 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
             login
           </Link>
         }
-      />
+      /> */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="gap-2 w-screen flex flex-col items-center justify-center">
           <div className="gap-2 w-2/5">
@@ -171,8 +197,15 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
               )}
             </div>
           </div>
-          <ErrorFeedback data={errors} className="w-2/5 rounded-full flex flex-col justify-center items-center" />
-          <Button disabled={isLoading} type="submit" className="mt-4 hover:bg-blue-900/60 duration-300">
+          {/* <ErrorFeedback
+            data={errors}
+            className="w-2/5 rounded-full flex flex-col justify-center items-center"
+          /> */}
+          <Button
+            disabled={isLoading}
+            type="submit"
+            className="mt-4 hover:bg-blue-900/60 duration-300"
+          >
             {isLoading && "creating your account..."}
             Register
           </Button>
