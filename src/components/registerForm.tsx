@@ -50,7 +50,7 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
             "Account cretaed successfully : " +
             new Date().toLocaleTimeString(),
           description:
-            "Your details were verified and account created successfully",
+            "Your account was created successfully, redirecting to home...",
         });
         setSuccess(true);
       })
