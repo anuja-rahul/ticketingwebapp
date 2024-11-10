@@ -9,7 +9,7 @@ export default function ErrorFeedback({data, className}: ErrorFeedbackProps) {
   if (!data) return <></>
 
   return (
-    <div className={cn('w-full flex flex-col p-4 rounded-md bg-red-200 text-red-800', className)}>
+    <div className={cn('p-2 rounded-md bg-red-200 text-red-800 mt-2', className)}>
       {data.message && <p className='font-bold'>{data.message}</p>}
 
       {data.errors && (

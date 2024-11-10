@@ -14,6 +14,7 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import ErrorFeedback from "./error";
 import { Button } from "./ui/button";
+import LoginCard from "./loginCard";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -52,9 +53,9 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
             message: error.message,
             status: error.response?.status || 500,
             errors: new Map(),
-            generalErrors: ["An unexpected error occurred"]
+            generalErrors: ["An unexpected error occurred"],
           });
-          console.log(error)
+          console.log(error);
         }
       })
       .finally(() => {
@@ -68,7 +69,7 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
   });
 
   return (
-    <div className={clsx("grid gap-6", className)} {...props}>
+    <div className={clsx("gap-6 w-screen flex flex-col", className)} {...props}>
       <Success
         show={success}
         message="Account created successfully"
@@ -79,85 +80,105 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
           </Link>
         }
       />
-
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-2">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="name@example.com"
-              autoCorrect="off"
-              autoComplete="email"
-              disabled={isLoading}
-              {...register("email")}
-            />
-            {formState.errors.email && (
-              <small className="text-red-600">
-                {formState.errors.email.message}
-              </small>
-            )}
+        <div className="gap-2 w-screen flex flex-col items-center justify-center">
+          <div className="gap-2 w-2/5">
+            <div className="flex flex-col items-center justify-center gap-y-2 mt-2 w-full">
+              <Label htmlFor="email" className="mt-2 w-full">
+                Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="name@example.com"
+                autoCorrect="off"
+                autoComplete="email"
+                className=""
+                disabled={isLoading}
+                {...register("email")}
+              />
+              {formState.errors.email && (
+                <small className="text-red-600">
+                  {formState.errors.email.message}
+                </small>
+              )}
+            </div>
 
-            <Label htmlFor="name">Username</Label>
-            <Input
-              id="name"
-              type="text"
-              placeholder="username"
-              autoCapitalize="none"
-              autoCorrect="off"
-              disabled={isLoading}
-              {...register("name")}
-            />
-            {formState.errors.name && (
-              <small className="text-red-600">
-                {formState.errors.name.message}
-              </small>
-            )}
+            <div className="flex flex-col items-center justify-center gap-y-2 mt-4 w-full">
+              <Label
+                htmlFor="name"
+                className="mt-2 w-full items-center flex justify-start"
+              >
+                Username
+              </Label>
+              <Input
+                id="name"
+                type="text"
+                placeholder="username"
+                autoCapitalize="none"
+                autoCorrect="off"
+                disabled={isLoading}
+                {...register("name")}
+              />
+              {formState.errors.name && (
+                <small className="text-red-600">
+                  {formState.errors.name.message}
+                </small>
+              )}
+            </div>
 
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="password"
-              autoCapitalize="off"
-              autoCorrect="off"
-              disabled={isLoading}
-              {...register("password")}
-            />
-            {formState.errors.password && (
-              <small className="text-red-600">
-                {formState.errors.password.message}
-              </small>
-            )}
+            <div className="flex flex-col items-center justify-center gap-y-2 mt-4 w-full">
+              <Label htmlFor="password" className="mt-2 w-full">
+                Password
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="password"
+                autoCapitalize="off"
+                autoCorrect="off"
+                disabled={isLoading}
+                {...register("password")}
+              />
+              {formState.errors.password && (
+                <small className="text-red-600">
+                  {formState.errors.password.message}
+                </small>
+              )}
+            </div>
 
-            <Label htmlFor="role">Role</Label>
-            <select
-              id="role"
-              autoCapitalize="off"
-              autoCorrect="off"
-              disabled={isLoading}
-              {...register("role")}
-              className="block w-full mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            >
-              <option value="">Select role</option>
-              <option value="vendor">Vendor</option>
-              <option value="customer">Customer</option>
-              <option value="admin">Admin</option>
-            </select>
-            {formState.errors.role && (
-              <small className="text-red-600">
-                {formState.errors.role.message}
-              </small>
-            )}
+            <div className="flex flex-col items-center justify-center gap-y-2 mt-4 w-full">
+              <Label htmlFor="role" className="mt-2 w-full">
+                Role
+              </Label>
+              <select
+                id="role"
+                autoCapitalize="off"
+                autoCorrect="off"
+                disabled={isLoading}
+                {...register("role")}
+                className="block w-full mt-1 bg-slate-950/80 border border-secondary rounded-lg shadow-sm focus:border-primary duration-200 p-2"
+              >
+                <option>Select role</option>
+                <option value="vendor">Vendor</option>
+                <option value="customer">Customer</option>
+                <option value="admin">Admin</option>
+              </select>
+              {formState.errors.role && (
+                <small className="text-red-600">
+                  {formState.errors.role.message}
+                </small>
+              )}
+            </div>
           </div>
-          <ErrorFeedback data={errors} />
-          <Button disabled={isLoading} type="submit">
+          <ErrorFeedback data={errors} className="w-2/5 rounded-full flex flex-col justify-center items-center" />
+          <Button disabled={isLoading} type="submit" className="mt-4 hover:bg-blue-900/60 duration-300">
             {isLoading && "creating your account..."}
             Register
           </Button>
         </div>
       </form>
+      <LoginCard />
     </div>
   );
 }

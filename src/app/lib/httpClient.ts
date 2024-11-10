@@ -1,5 +1,6 @@
 import Axios from 'axios'
-// import { envVar } from './env'
+// import { NEXT_PUBLIC_API_URL } from '../../lib/env';
+
 
 const defaultHeaders = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -8,6 +9,7 @@ const defaultHeaders = {
 };
 
 export const createHttpClient = (additionalHeaders = {}) => {
+  
   return Axios.create({
     baseURL: "http://localhost:8080/api",
     headers: {
