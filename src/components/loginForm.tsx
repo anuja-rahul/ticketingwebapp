@@ -55,11 +55,11 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
       const result = await response.json();
       console.log("Result:", result);
 
-      if (!response.ok) {
+      if (response.status == 201) {
         // console.log("Error:", result);
-        return false;
-      } else {
         return true;
+      } else {
+        return false;
       }
     } catch (error) {
       console.error("Error:", error);
@@ -89,6 +89,12 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             description: "cookies have been saved successfully...",
           });
           setSuccess(true);
+        } else {
+          toast({
+            variant: "destructive",
+            title: "failed saving cookies : " + new Date().toLocaleTimeString(),
+            description: "something went wrong while saving cookies...",
+          });
         }
       })
       .catch((error) => {
