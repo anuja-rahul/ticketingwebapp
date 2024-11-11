@@ -77,6 +77,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         const result = await sendData(userData);
         // console.log(userData);
         toast({
+          variant: "default",
           title: "login successful : " + new Date().toLocaleTimeString(),
           description:
             "You have logged in successfully, redirecting to home...",
@@ -91,13 +92,20 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         }
       })
       .catch((error) => {
-        if (error.status === 400) {
+        if (error.status === 400 ) {
           toast({
             variant: "destructive",
             title: "Invalid credentials : " + new Date().toLocaleTimeString(),
             description: "Please check your email and password",
           });
-        } else {
+        } else if (error.status === 422) {
+          toast({
+            variant: "destructive",
+            title: "Invalid password : " + new Date().toLocaleTimeString(),
+            description: "Password must not contain any empty spaces",
+          });
+        }
+         else {
           toast({
             variant: "destructive",
             title:
