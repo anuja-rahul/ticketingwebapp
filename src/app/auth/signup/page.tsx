@@ -10,7 +10,7 @@ import {
 
 export default function Signup() {
   return (
-    <section className="mt-10 flex flex-col justify-start items-start">
+    <section className="pt-10 flex flex-col justify-start items-start">
       <Breadcrumb className="pl-8">
       <BreadcrumbList>
         <BreadcrumbItem>
@@ -22,7 +22,7 @@ export default function Signup() {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-        <BreadcrumbLink href="/Signup">signup</BreadcrumbLink>
+        <BreadcrumbLink href="/auth/signup">signup</BreadcrumbLink>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

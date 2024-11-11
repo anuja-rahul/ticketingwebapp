@@ -2,11 +2,10 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Logo from "./../../assets/images/logo.png";
 import Image1 from "./../../assets/images/image1.webp";
-
-import { cn } from "@/lib/utils";
+// import Logo from "./../../assets/images/logo.png";
 // import { Icons } from "@/components/icons";
+import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -17,6 +16,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
+import { SidebarTrigger } from "./sidebar";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -59,15 +59,16 @@ const components: { title: string; href: string; description: string }[] = [
 export function Navbar() {
   return (
     <NavigationMenu>
-      <Image
+      <SidebarTrigger />
+      {/* <Image
         src={Logo}
         alt="logo"
         width={45}
         height={45}
         className="mr-8 ml-2"
-      />
+        /> */}
 
-      <NavigationMenuList>
+      <NavigationMenuList className="pl-4">
         <NavigationMenuItem>
           <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
           <NavigationMenuContent>

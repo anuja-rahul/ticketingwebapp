@@ -12,7 +12,7 @@ export default function RootLayout({
     <>
       <html lang="en" suppressHydrationWarning>
         <head />
-        <body>
+        <body className="w-screen">
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

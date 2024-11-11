@@ -1,14 +1,32 @@
 "use client";
 
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 
 export default function Auth() {
   return (
-    <section className="p-12">
-      <div className="flex flex-col justify-center items-center mt-12">
-        <div className="space-y-1 flex flex-col justify-center items-center text-sm text-muted-foreground">
+    <section className="m-12 w-screen flex flex-row">
+      <Breadcrumb className="">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/auth">auth</BreadcrumbLink>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <div className="flex flex-col justify-center items-center mt-12 w-4/5">
+        <div className="space-y-1 flex flex-col justify-center items-center text-sm text-muted-foreground w-auto">
           <h2 className="text-4xl font-medium text-foreground leading-none mb-4">
             Authentication
           </h2>
