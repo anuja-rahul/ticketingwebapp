@@ -41,9 +41,9 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
   const { toast } = useToast();
 
   async function sendData(data: UserDataSchema) {
-    console.log("Sending data:", data);
+    // console.log("Sending data:", data);
     try {
-      console.log("Sending data:", JSON.stringify(data));
+      // console.log("Sending data:", JSON.stringify(data));
       const response = await fetch("/api/setcookies", {
         method: "POST",
         headers: {
@@ -56,11 +56,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
       console.log("Result:", result);
 
       if (!response.ok) {
-        console.log("Error:", result);
-        toast({
-          title: "Failed saving cookies : " + new Date().toLocaleTimeString(),
-          description: "Setting cookies failed, please try again later...",
-        });
+        // console.log("Error:", result);
         return false;
       } else {
         return true;
@@ -87,11 +83,17 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         });
 
         if (result) {
+          toast({
+            title: "cookies saved : " + new Date().toLocaleTimeString(),
+            description:
+              "cookies have been saved successfully...",
+          });
           setSuccess(true);
         }
       })
       .catch((error) => {
         toast({
+          variant: "destructive",
           title:
             "Error occured, please try again : " +
             new Date().toLocaleTimeString(),
