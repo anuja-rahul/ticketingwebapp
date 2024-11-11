@@ -85,20 +85,27 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         if (result) {
           toast({
             title: "cookies saved : " + new Date().toLocaleTimeString(),
-            description:
-              "cookies have been saved successfully...",
+            description: "cookies have been saved successfully...",
           });
           setSuccess(true);
         }
       })
       .catch((error) => {
-        toast({
-          variant: "destructive",
-          title:
-            "Error occured, please try again : " +
-            new Date().toLocaleTimeString(),
-          description: error.message,
-        });
+        if (error.status === 400) {
+          toast({
+            variant: "destructive",
+            title: "Invalid credentials : " + new Date().toLocaleTimeString(),
+            description: "Please check your email and password",
+          });
+        } else {
+          toast({
+            variant: "destructive",
+            title:
+              "Error occured, please try again : " +
+              new Date().toLocaleTimeString(),
+            description: error.message,
+          });
+        }
       })
       .finally(() => {
         setIsLoading(false);

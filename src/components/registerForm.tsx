@@ -57,6 +57,7 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
       })
       .catch((error) => {
         toast({
+          variant: "destructive",
           title:
             "Error occured, please try again : " +
             new Date().toLocaleTimeString(),
