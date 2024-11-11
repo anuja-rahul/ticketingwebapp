@@ -16,12 +16,9 @@ export async function GET() {
       role &&
       role.length > 3
     ) {
-      return NextResponse.json({ token, username, role }, { status: 200 });
+      return NextResponse.json({ valid: true }, { status: 200 });
     } else {
-      return NextResponse.json(
-        { message: "One or more cookies have insufficient length" },
-        { status: 400 }
-      );
+      return NextResponse.json({ valid: false }, { status: 400 });
     }
   } catch (error) {
     console.error("RouteError:", error);
