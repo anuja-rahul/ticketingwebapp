@@ -1,6 +1,6 @@
 "use client";
 
-import { object, string, z } from "zod";
+import { z } from "zod";
 import React, { useEffect } from "react";
 import { createHttpClient } from "@/app/lib/httpClient";
 import { useForm } from "react-hook-form";
@@ -25,41 +25,70 @@ const loginSchema = z.object({
   password: z.string().min(5),
 });
 
-const userDataSchema = z.object({
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const dataSchema = z.object({
   token: z.string(),
   username: z.string().email(),
-  role: z.string()
-})
+  role: z.string(),
+});
 
 type Schema = z.infer<typeof loginSchema>;
+type UserDataSchema = z.infer<typeof dataSchema>;
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [success, setSuccess] = React.useState<boolean>(false);
   const { toast } = useToast();
 
-  async function sendData(data: userDataSchema) { 
-      console.log("Sending data:", data); 
+  async function sendData(data: UserDataSchema) {
+    console.log("Sending data:", data);
+    try {
+      console.log("Sending data:", JSON.stringify(data));
+      const response = await fetch("/api/setcookies", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      console.log("Result:", result);
+
+      if (!response.ok) {
+        console.log("Error:", result);
+        toast({
+          title: "Failed saving cookies : " + new Date().toLocaleTimeString(),
+          description: "Setting cookies failed, please try again later...",
+        });
+        return false;
+      } else {
+        return true;
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   }
 
   async function onSubmit(data: Schema) {
-    // setErrors(undefined);
     setSuccess(false);
     setIsLoading(true);
     createHttpClient()
       .post("/auth/authenticate", data)
-      .then((response) => {
+      .then(async (response) => {
         // testing for package return
         const userData = response.data;
-        console.log(userData);
+        const result = await sendData(userData);
+        // console.log(userData);
         toast({
-          title:
-            "login successful : " + new Date().toLocaleTimeString(),
+          title: "login successful : " + new Date().toLocaleTimeString(),
           description:
             "You have logged in successfully, redirecting to home...",
         });
-        setSuccess(true);
 
+        if (result) {
+          setSuccess(true);
+        }
       })
       .catch((error) => {
         toast({
@@ -68,7 +97,6 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             new Date().toLocaleTimeString(),
           description: error.message,
         });
-        
       })
       .finally(() => {
         setIsLoading(false);
@@ -90,7 +118,6 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
 
   return (
     <div className={clsx("gap-6 flex flex-col", className)} {...props}>
-      
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="gap-2 w-screen flex flex-col items-center justify-center">
           <div className="gap-2 w-2/5">
@@ -144,7 +171,11 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
           </Button>
         </div>
       </form>
-      <LoginRegisterCard text="Don't have an account ?" url="/auth/signup" placeholder="signup" />
+      <LoginRegisterCard
+        text="Don't have an account ?"
+        url="/auth/signup"
+        placeholder="signup"
+      />
     </div>
   );
 }
