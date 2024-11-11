@@ -24,20 +24,22 @@ export default function Home() {
   // };
 
   return (
-    <section>
-      <Breadcrumb className="pl-8">
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-        </BreadcrumbList>
-      </Breadcrumb>
-      <div className="flex flex-col items-center justify-center pt-6">
-        <h1>Hello, this is the home</h1>
-        <p>Reminder: finish this !</p>
-        {/* <button onClick={sendRequest}>Send Request</button>
-        <p>Response: {response}</p> */}
+    <section className="pt-10 flex flex-col justify-center items-center w-full">
+      <div className="flex flex-col items-start justify-start w-full">
+        <Breadcrumb className="ml-8">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-foreground text-4xl my-4 text-balance text-center font-bold">
+          Home
+        </h1>
+        <p className="mb-2">Finish up the home</p>
       </div>
     </section>
   );

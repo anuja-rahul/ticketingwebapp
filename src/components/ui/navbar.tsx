@@ -3,7 +3,6 @@
 import * as React from "react";
 import Link from "next/link";
 import Image1 from "./../../assets/images/image1.webp";
-// import Logo from "./../../assets/images/logo.png";
 // import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import {
@@ -17,6 +16,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
 import { SidebarTrigger } from "./sidebar";
+import LogoLink from "../LogoLink";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -34,8 +34,7 @@ const components: { title: string; href: string; description: string }[] = [
   {
     title: "Dashboard",
     href: "/dashboard",
-    description:
-      "get the latest staistics about our platform.",
+    description: "get the latest staistics about our platform.",
   },
   {
     title: "Profile",
@@ -45,14 +44,12 @@ const components: { title: string; href: string; description: string }[] = [
   {
     title: "Vendors",
     href: "/vendors",
-    description:
-      "View a summerized preview of all our vendors.",
+    description: "View a summerized preview of all our vendors.",
   },
   {
     title: "Home",
     href: "/",
-    description:
-      "Feeling lost ? Get back to home.",
+    description: "Feeling lost ? Get back to home.",
   },
 ];
 
@@ -60,17 +57,12 @@ export function Navbar() {
   return (
     <NavigationMenu className="w-full">
       <SidebarTrigger />
-      {/* <Image
-        src={Logo}
-        alt="logo"
-        width={45}
-        height={45}
-        className="mr-8 ml-2"
-        /> */}
-
-      <NavigationMenuList className="pl-4">
+      <NavigationMenuList className="pl-2">
+        <LogoLink />
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+          <NavigationMenuTrigger>
+            Getting started
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -80,7 +72,7 @@ export function Navbar() {
                     href="/"
                   >
                     {/* <Icons.logo className="h-6 w-6" /> */}
-                    <Image src={Image1} alt="image1" className="rounded-xl"/>
+                    <Image src={Image1} alt="image1" className="rounded-xl" />
                     <div className="mb-2 mt-4 text-lg font-medium">
                       TicketingApp
                     </div>

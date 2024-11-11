@@ -1,4 +1,14 @@
-import { ChartLine, DollarSign, Home, LayoutList, LogIn, LogOut, ShoppingCart, User2, UserPlus2 } from "lucide-react";
+import {
+  ChartLine,
+  DollarSign,
+  Home,
+  LayoutList,
+  LogIn,
+  LogOut,
+  ShoppingCart,
+  User2,
+  UserPlus2,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -65,19 +75,23 @@ export function AppSidebar() {
     <Sidebar variant="floating" collapsible="icon" side="left">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-md">TicketingApp</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-md">
+            TicketingApp
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+                {items.map((item) => (
+                  <SidebarMenuItem key={item.title} className="duration-300 hover:translate-y-[-2px]">
+                    <SidebarMenuButton asChild>
+                      <a href={item.url}>
+                        
+                            <item.icon />
+                            
+                        <span>{item.title}</span>
+                      </a>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

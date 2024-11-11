@@ -13,18 +13,20 @@ import Link from "next/link";
 
 export default function Auth() {
   return (
-    <section className="w-full flex flex-row my-12 ">
-      <Breadcrumb className="">bnv
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/auth">auth</BreadcrumbLink>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+    <section className="flex flex-col justify-center items-center w-full my-12">
+      <div className="flex flex-col items-start justify-start w-full">
+        <Breadcrumb className="pl-8">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/auth">auth</BreadcrumbLink>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
       <div className="flex flex-col justify-center items-center mt-12 w-4/5">
         <div className="space-y-1 flex flex-col justify-center items-center text-sm text-muted-foreground w-auto">
           <h2 className="text-4xl font-medium text-foreground leading-none mb-4">
