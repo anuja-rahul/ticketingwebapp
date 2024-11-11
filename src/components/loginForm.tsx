@@ -1,6 +1,6 @@
 "use client";
 
-import { z } from "zod";
+import { object, string, z } from "zod";
 import React, { useEffect } from "react";
 import { createHttpClient } from "@/app/lib/httpClient";
 import { useForm } from "react-hook-form";
@@ -25,12 +25,22 @@ const loginSchema = z.object({
   password: z.string().min(5),
 });
 
+const userDataSchema = z.object({
+  token: z.string(),
+  username: z.string().email(),
+  role: z.string()
+})
+
 type Schema = z.infer<typeof loginSchema>;
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [success, setSuccess] = React.useState<boolean>(false);
   const { toast } = useToast();
+
+  async function sendData(data: userDataSchema) { 
+      console.log("Sending data:", data); 
+  }
 
   async function onSubmit(data: Schema) {
     // setErrors(undefined);
@@ -40,7 +50,8 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
       .post("/auth/authenticate", data)
       .then((response) => {
         // testing for package return
-        console.log(response.data);
+        const userData = response.data;
+        console.log(userData);
         toast({
           title:
             "login successful : " + new Date().toLocaleTimeString(),
@@ -48,6 +59,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             "You have logged in successfully, redirecting to home...",
         });
         setSuccess(true);
+
       })
       .catch((error) => {
         toast({

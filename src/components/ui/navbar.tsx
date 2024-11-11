@@ -58,7 +58,7 @@ const components: { title: string; href: string; description: string }[] = [
 
 export function Navbar() {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="w-full">
       <SidebarTrigger />
       {/* <Image
         src={Logo}

@@ -13,8 +13,8 @@ import Link from "next/link";
 
 export default function Auth() {
   return (
-    <section className="m-12 w-screen flex flex-row">
-      <Breadcrumb className="">
+    <section className="w-full flex flex-row my-12 ">
+      <Breadcrumb className="">bnv
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink href="/">Home</BreadcrumbLink>

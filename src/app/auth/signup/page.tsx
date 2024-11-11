@@ -10,8 +10,8 @@ import {
 
 export default function Signup() {
   return (
-    <section className="pt-10 flex flex-col justify-start items-start">
-      <Breadcrumb className="pl-8">
+    <section className="pt-10 flex flex-col justify-start items-start w-full">
+      <Breadcrumb className="ml-8">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Home</BreadcrumbLink>

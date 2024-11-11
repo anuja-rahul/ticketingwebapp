@@ -20,7 +20,7 @@ export default function Layout({ children }: LayoutProps) {
     <>
       <SidebarProvider defaultOpen={false}>
         <AppSidebar />
-        <main className="w-screen">
+        <main className="w-full">
           <div className="flex justify-center items-center layout">
             <div
               id="nav"
