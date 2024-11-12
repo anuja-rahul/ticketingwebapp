@@ -72,26 +72,28 @@ const items = [
 
 export function AppSidebar() {
   return (
-    <Sidebar variant="floating" collapsible="icon" side="left">
-      <SidebarContent>
+    <Sidebar variant="floating" collapsible="icon" side="left" className="bg-transparent">
+      <SidebarContent className="bg-gradient-to-b from-background to-secondary rounded-2xl">
         <SidebarGroup>
           <SidebarGroupLabel className="text-md">
             TicketingApp
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-                {items.map((item) => (
-                  <SidebarMenuItem key={item.title} className="duration-300 hover:translate-y-[-2px]">
-                    <SidebarMenuButton asChild>
-                      <a href={item.url}>
-                        
-                            <item.icon />
-                            
-                        <span>{item.title}</span>
-                      </a>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+              {items.map((item) => (
+                <SidebarMenuItem
+                  key={item.title}
+                  className="duration-300 hover:translate-y-[-2px]"
+                >
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      <item.icon />
+
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

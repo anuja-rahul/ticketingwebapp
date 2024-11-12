@@ -1,43 +1,43 @@
 "use client";
 import { TestAPI } from "@/app/lib/TestAPI";
-import { useToast } from "@/hooks/use-toast";
 import React, { useEffect } from "react";
 import Indicator from "./Indicator";
+import { usePathname } from "next/navigation";
 
 export default function SystemStatus() {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [normal, setNormal] = React.useState<boolean>(false);
-  const { toast } = useToast();
+  const pathname = usePathname();
+
+  const testBackend = async () => {
+    setIsLoading(true);
+    try {
+      const backendAPI = await TestAPI();
+      console.log("api", backendAPI);
+      setNormal(backendAPI);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    async function testBackend() {
-      try {
-        const backendAPI = await TestAPI();
-        console.log("api", backendAPI);
-        setNormal(backendAPI);
-      } catch (error) {
-        console.error(error);
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Failed to reach backend",
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
+    // Run backend check on initial load and every route change
     testBackend();
-  }, [toast]); // Removed `normal` from dependencies
+  }, [pathname]);
 
   return (
-    <div>
+    <div className="w-full">
       {isLoading ? (
-        <p className="text-foreground/80 text-xs">Loading...</p>
+        <div className="flex items-center">
+          <Indicator className="bg-yellow-400" />
+          <span className="ml-2 text-xs">Loading...</span>
+        </div>
       ) : normal ? (
         <div className="flex items-center">
           <Indicator className="bg-primary" />
-          <span className="ml-2">All systems normal</span>
+          <span className="ml-2 text-xs">All systems normal</span>
         </div>
       ) : (
         <div className="flex items-center">
