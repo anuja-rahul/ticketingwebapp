@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Image1 from "./../../assets/images/image1.webp";
+// import Image1 from "./../../assets/images/image1.webp";
+import Image3 from "./../../assets/images/silver_tickets.png";
+// import Image2 from "./../../assets/images/purple_tickets.png";
 // import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import {
@@ -60,9 +62,7 @@ export function Navbar() {
       <NavigationMenuList className="pl-2">
         <LogoLink />
         <NavigationMenuItem>
-          <NavigationMenuTrigger>
-            Getting started
-          </NavigationMenuTrigger>
+          <NavigationMenuTrigger className="border">TicketingApp</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -72,7 +72,7 @@ export function Navbar() {
                     href="/"
                   >
                     {/* <Icons.logo className="h-6 w-6" /> */}
-                    <Image src={Image1} alt="image1" className="rounded-xl" />
+                    <Image src={Image3} alt="image1" className="rounded-xl" />
                     <div className="mb-2 mt-4 text-lg font-medium">
                       TicketingApp
                     </div>
@@ -96,7 +96,7 @@ export function Navbar() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Services</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="border">Services</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (

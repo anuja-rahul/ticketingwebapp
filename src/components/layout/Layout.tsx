@@ -25,15 +25,15 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
-      <section className="bg-gradient-to-b from-background to-secondary">
+      <section className="bg-gradient-to-b from-background to-secondary w-full">
         <SidebarProvider defaultOpen={false}>
           <AppSidebar />
           <main className="w-full min-h-screen bg-gradient-to-b from-background to-secondary">
-            <div className="flex justify-center items-center layout">
+            <div className="flex justify-center items-center layout w-full top-0 fixed">
               <div
                 id="nav"
                 className="w-4/5 flex flex-row align-middle justify-between h-10 items-center p-7 pr-4 pl-2 rounded-3xl 
-          bg-gradient-to-r from-primary/1 via-muted-foreground/10 to-primary/1 border"
+                bg-gradient-to-r from-primary/1 via-muted-foreground/10 to-primary/1 border"
               >
                 {/* navbar */}
                 <Navbar />
@@ -69,7 +69,7 @@ export default function Layout({ children }: LayoutProps) {
                 </div>
               </div>
             </div>
-            <div className="layout w-full">{children}</div>
+            <div className="layout w-full mt-8">{children}</div>
             <div className="w-full flex flex-col items-center justify-end bottom-0 mt-10">
               <Footer />
             </div>

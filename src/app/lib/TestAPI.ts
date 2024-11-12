@@ -4,14 +4,13 @@ export async function TestAPI() {
   try {
     const response = await createHttpClient().get("/test");
     if (response.status === 200) {
-      console.log(response);
-      return true;
+      return response;
     } else {
-      return false;
+      return null;
     }
   } catch (error) {
     console.log(error);
-    return false;
+    return null;
   }
 }
 

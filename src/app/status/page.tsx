@@ -32,13 +32,17 @@ export default function Status() {
   const [frontNormal, setFrontNormal] = React.useState<boolean>(false);
   const [backNormal, setBackNormal] = React.useState<boolean>(false);
 
+
   const pathname = usePathname();
 
   const testBackend = async () => {
     setIsBackLoading(true);
     try {
       const backendAPI = await TestAPI();
-      setBackNormal(backendAPI);
+
+      if (backendAPI) {
+        setBackNormal(true);
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -199,7 +203,7 @@ export default function Status() {
           </div>
         ) : backNormal || frontNormal ? (
           <div className="flex items-center">
-            <span className="ml-2 text-xs">Some systems operating</span>
+            <span className="ml-2 text-xs">Some systems operational</span>
           </div>
         ) : (
           <div className="flex items-center">
@@ -230,7 +234,7 @@ export default function Status() {
   ];
 
   return (
-    <section className="flex flex-col justify-start items-center w-full my-12 h-screen">
+    <section className="flex flex-col justify-start items-center w-full my-12 h-screen pt-10">
       <div className="flex flex-col items-start justify-start w-full">
         <Breadcrumb className="pl-8">
           <BreadcrumbList>

@@ -17,7 +17,9 @@ export default function SystemStatus() {
     setIsBackLoading(true);
     try {
       const backendAPI = await TestAPI();
-      setBackNormal(backendAPI);
+      if (backendAPI) {
+        setBackNormal(true);
+      }
     } catch (error) {
       console.error(error);
       setBackNormal(false);
@@ -40,27 +42,26 @@ export default function SystemStatus() {
   };
 
   useEffect(() => {
-    // Run both backend and frontend checks on initial load and every route change
     testBackend();
     testFrontend();
   }, [pathname]);
 
   return (
     <div className="w-full">
-      {(isBackLoading || isFrontLoading) ? (
+      {isBackLoading || isFrontLoading ? (
         <div className="flex items-center">
           <Indicator className="bg-yellow-300" />
           <span className="ml-2 text-xs">Loading...</span>
         </div>
-      ) : (backNormal && frontNormal) ? (
+      ) : backNormal && frontNormal ? (
         <div className="flex items-center">
           <Indicator className="bg-primary" />
           <span className="ml-2 text-xs">All systems normal</span>
         </div>
-      ) : (backNormal || frontNormal) ? (
+      ) : backNormal || frontNormal ? (
         <div className="flex items-center">
           <Indicator className="bg-orange-500" />
-          <span className="ml-2 text-xs">Some systems operating</span>
+          <span className="ml-2 text-xs">Some systems operational</span>
         </div>
       ) : (
         <div className="flex items-center">
