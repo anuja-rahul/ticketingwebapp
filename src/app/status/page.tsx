@@ -161,6 +161,7 @@ export default function Status() {
   function FrontEndButton() {
     return (
       <Button
+        className="hover:border-muted-foreground/30 duration-300"
         variant={"outline"}
         onClick={() => {
           testFrontend();
@@ -174,6 +175,7 @@ export default function Status() {
   function BackEndButton() {
     return (
       <Button
+        className="hover:border-muted-foreground/30 duration-300"
         variant={"outline"}
         onClick={() => {
           testBackend();
@@ -267,7 +269,7 @@ export default function Status() {
               <TableRow key={item.service}>
                 <TableCell className="font-medium">{item.indicator}</TableCell>
                 <TableCell className="w-52">{item.state}</TableCell>
-                <TableCell>{item.service}</TableCell>
+                <TableCell className="text-sm w-52">{item.service}</TableCell>
                 <TableCell className="text-xs">{item.description}</TableCell>
                 <TableCell className="text-right">{item.run}</TableCell>
               </TableRow>
@@ -284,6 +286,7 @@ export default function Status() {
               <TableCell colSpan={2}>All services</TableCell>
               <TableCell className="text-right">
                 <Button
+                  className="hover:border-muted-foreground/30 duration-300"
                   variant={"outline"}
                   onClick={() => {
                     testBackend();
