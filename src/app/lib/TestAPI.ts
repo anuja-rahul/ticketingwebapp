@@ -14,3 +14,23 @@ export async function TestAPI() {
     return false;
   }
 }
+
+export async function TestServerRoutes() {
+  try {
+    const response = await fetch("/api/test", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return false;
+  }
+}

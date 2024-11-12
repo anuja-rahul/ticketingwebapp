@@ -1,43 +1,66 @@
 "use client";
-import { TestAPI } from "@/app/lib/TestAPI";
+import { TestAPI, TestServerRoutes } from "@/app/lib/TestAPI";
 import React, { useEffect } from "react";
 import Indicator from "./Indicator";
 import { usePathname } from "next/navigation";
 
 export default function SystemStatus() {
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [normal, setNormal] = React.useState<boolean>(false);
   const pathname = usePathname();
 
+  const [isBackLoading, setIsBackLoading] = React.useState<boolean>(true);
+  const [isFrontLoading, setIsFrontLoading] = React.useState<boolean>(true);
+
+  const [backNormal, setBackNormal] = React.useState<boolean>(false);
+  const [frontNormal, setFrontNormal] = React.useState<boolean>(false);
+
   const testBackend = async () => {
-    setIsLoading(true);
+    setIsBackLoading(true);
     try {
       const backendAPI = await TestAPI();
-      console.log("api", backendAPI);
-      setNormal(backendAPI);
+      setBackNormal(backendAPI);
     } catch (error) {
       console.error(error);
+      setBackNormal(false);
     } finally {
-      setIsLoading(false);
+      setIsBackLoading(false);
+    }
+  };
+
+  const testFrontend = async () => {
+    setIsFrontLoading(true);
+    try {
+      const frontendAPI = await TestServerRoutes();
+      setFrontNormal(frontendAPI);
+    } catch (error) {
+      console.error(error);
+      setFrontNormal(false);
+    } finally {
+      setIsFrontLoading(false);
     }
   };
 
   useEffect(() => {
-    // Run backend check on initial load and every route change
+    // Run both backend and frontend checks on initial load and every route change
     testBackend();
+    testFrontend();
   }, [pathname]);
 
   return (
     <div className="w-full">
-      {isLoading ? (
+      {(isBackLoading || isFrontLoading) ? (
         <div className="flex items-center">
-          <Indicator className="bg-yellow-400" />
+          <Indicator className="bg-yellow-300" />
           <span className="ml-2 text-xs">Loading...</span>
         </div>
-      ) : normal ? (
+      ) : (backNormal && frontNormal) ? (
         <div className="flex items-center">
           <Indicator className="bg-primary" />
           <span className="ml-2 text-xs">All systems normal</span>
+        </div>
+      ) : (backNormal || frontNormal) ? (
+        <div className="flex items-center">
+          <Indicator className="bg-orange-500" />
+          <span className="ml-2 text-xs">Some systems operating</span>
         </div>
       ) : (
         <div className="flex items-center">
