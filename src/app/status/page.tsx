@@ -234,7 +234,7 @@ export default function Status() {
   ];
 
   return (
-    <section className="flex flex-col justify-start items-center w-full my-12 h-screen pt-10">
+    <section className="flex flex-col justify-start items-center w-full my-12 h-screen pt-10 z-[1]">
       <div className="flex flex-col items-start justify-start w-full">
         <Breadcrumb className="pl-8">
           <BreadcrumbList>

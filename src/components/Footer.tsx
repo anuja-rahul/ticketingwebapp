@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     // bg-blue-900/30
     <footer
-      className="w-[90%] bottom-0 flex flex-row align-middle justify-between min-h-10 h-28 items-center rounded-full 
+      className="w-[95%] bottom-0 flex flex-row align-middle justify-between min-h-10 h-28 items-center px-20 rounded-full 
            gap-2 p-12 bg-gradient-to-r from-background/60 via-muted-foreground/20 to-background/60 border-background/50 border"
     >
       <div className="flex flex-row items-center justify-center w-2/12 p-4">

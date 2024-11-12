@@ -25,7 +25,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
-      <section className="bg-gradient-to-b from-background to-secondary w-full">
+      <section className="bg-gradient-to-b from-background to-secondary w-full z-[999]">
         <SidebarProvider defaultOpen={false}>
           <AppSidebar />
           <main className="w-full min-h-screen bg-gradient-to-b from-background to-secondary">
