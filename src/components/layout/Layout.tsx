@@ -16,6 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
+import Footer from "../Footer";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -26,7 +27,7 @@ export default function Layout({ children }: LayoutProps) {
     <>
       <SidebarProvider defaultOpen={false}>
         <AppSidebar />
-        <main className="w-full">
+        <main className="w-full min-h-screen">
           <div className="flex justify-center items-center layout">
             <div
               id="nav"
@@ -68,6 +69,9 @@ export default function Layout({ children }: LayoutProps) {
             </div>
           </div>
           <div className="layout w-full">{children}</div>
+          <div className="w-full flex flex-col items-center justify-end bottom-0 mt-10">
+            <Footer />
+          </div>
         </main>
       </SidebarProvider>
     </>

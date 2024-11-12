@@ -8,17 +8,10 @@ export async function GET() {
     const username = cookieStore.get("username")?.value;
     const role = cookieStore.get("role")?.value;
 
-    if (
-      token &&
-      token.length > 3 &&
-      username &&
-      username.length > 3 &&
-      role &&
-      role.length > 3
-    ) {
-      return NextResponse.json({ valid: true }, { status: 200 });
-    } else {
+    if (token == undefined || username == undefined || role == undefined) {
       return NextResponse.json({ valid: false }, { status: 400 });
+    } else {
+      return NextResponse.json({ valid: true }, { status: 200 });
     }
   } catch (error) {
     console.error("RouteError:", error);
