@@ -66,6 +66,7 @@ export default function Status() {
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname]);
+
     return (
       <div className="w-full">
         {isFrontLoading ? (
@@ -84,6 +85,24 @@ export default function Status() {
             {/* <span className="ml-2 text-xs">System not responding</span> */}
           </div>
         )}
+      </div>
+    );
+  }
+
+  function SpecialIndicator() {
+    let colorClass = "bg-blue-500";
+
+    if (isBackLoading || isFrontLoading) {
+      colorClass = "bg-yellow-400";
+    } else if (!frontNormal && !backNormal) {
+      colorClass = "bg-red-600";
+    } else if (frontNormal !== backNormal) {
+      colorClass = "bg-orange-500";
+    }
+
+    return (
+      <div className="">
+        <Indicator className={colorClass} />
       </div>
     );
   }
@@ -165,13 +184,37 @@ export default function Status() {
     );
   }
 
+  function AllSystemsState() {
+    return (
+      <div className="w-full">
+        {isBackLoading || isFrontLoading ? (
+          <div className="flex items-center">
+            <span className="ml-2 text-xs">Loading...</span>
+          </div>
+        ) : backNormal && frontNormal ? (
+          <div className="flex items-center">
+            <span className="ml-2 text-xs">All systems normal</span>
+          </div>
+        ) : backNormal || frontNormal ? (
+          <div className="flex items-center">
+            <span className="ml-2 text-xs">Some systems operating</span>
+          </div>
+        ) : (
+          <div className="flex items-center">
+            <span className="ml-2 text-xs">System not responding</span>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   const data = [
     {
       indicator: FrontEndIndicator(isFrontLoading, frontNormal),
       state: FrontEndState(isFrontLoading, frontNormal),
-      service: "Server Actions",
+      service: "Route Handlers",
       description:
-        "Handles all the communications between the client and the server",
+        "handles all the communications between the client and the server by processing HTTP requests",
       run: FrontEndButton(),
     },
     {
@@ -232,7 +275,13 @@ export default function Status() {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableCell colSpan={4}>indicator speacial</TableCell>
+              <TableCell>
+                <SpecialIndicator />
+              </TableCell>
+              <TableCell>
+                <AllSystemsState />
+              </TableCell>
+              <TableCell colSpan={2}>All services</TableCell>
               <TableCell className="text-right">
                 <Button
                   variant={"outline"}
