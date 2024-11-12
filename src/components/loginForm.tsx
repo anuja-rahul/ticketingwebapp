@@ -12,6 +12,7 @@ import { Button } from "./ui/button";
 import LoginRegisterCard from "./loginRegisterCard";
 import { useToast } from "@/hooks/use-toast";
 import { TermsAndConditions } from "./termsAndConditions";
+import { checkCookieStatus, sendCookieData } from "@/app/lib/BasicCrud";
 // import { toast } from "sonner";
 // import { HttpErrorResponse } from "../app/models/http/HttpErrorResponse";
 // import Success from "./success";
@@ -26,45 +27,45 @@ const loginSchema = z.object({
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const dataSchema = z.object({
-  token: z.string(),
-  username: z.string().email(),
-  role: z.string(),
-});
+// const dataSchema = z.object({
+//   token: z.string(),
+//   username: z.string().email(),
+//   role: z.string(),
+// });
 
 type Schema = z.infer<typeof loginSchema>;
-type UserDataSchema = z.infer<typeof dataSchema>;
+// type UserDataSchema = z.infer<typeof dataSchema>;
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [success, setSuccess] = React.useState<boolean>(false);
   const { toast } = useToast();
 
-  async function sendData(data: UserDataSchema) {
-    // console.log("Sending data:", data);
-    try {
-      // console.log("Sending data:", JSON.stringify(data));
-      const response = await fetch("/api/setcookies", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+  // async function sendData(data: UserDataSchema) {
+  //   // console.log("Sending data:", data);
+  //   try {
+  //     // console.log("Sending data:", JSON.stringify(data));
+  //     const response = await fetch("/api/cookies/set", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(data),
+  //     });
 
-      const result = await response.json();
-      console.log("Result:", result);
+  //     const result = await response.json();
+  //     console.log("Result:", result);
 
-      if (response.status == 201) {
-        // console.log("Error:", result);
-        return true;
-      } else {
-        return false;
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }
+  //     if (response.status == 201) {
+  //       // console.log("Error:", result);
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // }
 
   async function onSubmit(data: Schema) {
     setSuccess(false);
@@ -74,7 +75,8 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
       .then(async (response) => {
         // testing for package return
         const userData = response.data;
-        const result = await sendData(userData);
+        const result = await sendCookieData(userData);
+        console.log(await checkCookieStatus())
         // console.log(userData);
         toast({
           variant: "default",

@@ -12,6 +12,7 @@ import { Button } from "./ui/button";
 import LoginRegisterCard from "./loginRegisterCard";
 import { useToast } from "@/hooks/use-toast";
 import { TermsAndConditions } from "./termsAndConditions";
+import { sendCookieData } from "@/app/lib/BasicCrud";
 // import { toast } from "sonner";
 // import { HttpErrorResponse } from "../app/models/http/HttpErrorResponse";
 // import Success from "./success";
@@ -44,8 +45,10 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true);
     createHttpClient()
       .post("/auth/register", data)
-      .then((response) => {
+      .then(async (response) => {
         // testing for package return
+        const userData = response.data;
+        const result = await sendCookieData(userData);
         console.log(response.data);
         toast({
           title:
@@ -53,28 +56,49 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
           description:
             "Your account was created successfully, redirecting to home...",
         });
-        setSuccess(true);
+        if (result) {
+          toast({
+            title: "cookies saved : " + new Date().toLocaleTimeString(),
+            description: "cookies have been saved successfully...",
+          });
+          setSuccess(true);
+        } else {
+          toast({
+            variant: "destructive",
+            title: "failed saving cookies : " + new Date().toLocaleTimeString(),
+            description: "something went wrong while saving cookies...",
+          });
+        }
       })
       .catch((error) => {
-        toast({
-          variant: "destructive",
-          title:
-            "Error occured, please try again : " +
-            new Date().toLocaleTimeString(),
-          description: error.message,
-        });
-        // if (error.response && error.response.data) {
-        //   const errordata = error.response.data as HttpErrorResponse;
-        //   setErrors(errordata);
-        // } else {
-        //   setErrors({
-        //     message: error.message,
-        //     status: error.response?.status || 500,
-        //     errors: new Map(),
-        //     generalErrors: ["An unexpected error occurred"],
-        //   });
-        //   console.log(error);
-        // }
+        if (error.status === 400) {
+          toast({
+            variant: "destructive",
+            title: "Invalid credentials : " + new Date().toLocaleTimeString(),
+            description: "Please check your email and password",
+          });
+        } else if (error.status === 422) {
+          toast({
+            variant: "destructive",
+            title: "Invalid credentials : " + new Date().toLocaleTimeString(),
+            description:
+              "Email/Username/Password must not contain any empty spaces",
+          });
+        } else if (error.status === 409) {
+          toast({
+            variant: "destructive",
+            title: "Invalid credentials : " + new Date().toLocaleTimeString(),
+            description: "Account with email/username already exists",
+          });
+        } else {
+          toast({
+            variant: "destructive",
+            title:
+              "Error occured, please try again : " +
+              new Date().toLocaleTimeString(),
+            description: error.message,
+          });
+        }
       })
       .finally(() => {
         setIsLoading(false);
@@ -212,7 +236,11 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
           </Button>
         </div>
       </form>
-      <LoginRegisterCard text="Already have an account ?" url="/auth/login" placeholder="login" />
+      <LoginRegisterCard
+        text="Already have an account ?"
+        url="/auth/login"
+        placeholder="login"
+      />
     </div>
   );
 }
