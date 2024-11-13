@@ -76,9 +76,9 @@ const components: {
     description: "want to checkout your profile ?",
   },
   {
-    title: TitleAccess({ title: "Vendors", role: "customer" }),
-    href: "/vendors",
-    description: "View a summerized preview of all our vendors.",
+    title: TitleAccess({ title: "All Users", role: "admin" }),
+    href: "/users",
+    description: "View a summerized preview of all our users.",
   },
   {
     title: TitleAccess({ title: "System", role: "any" }),

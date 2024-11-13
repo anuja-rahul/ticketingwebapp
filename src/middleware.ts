@@ -13,11 +13,12 @@ export function middleware(request: NextRequest) {
   const url = new URL(request.url);
   const path = url.pathname;
 
-  // Check role and paths
+  // VENDOR
   if (role.value === "VENDOR" && path.startsWith("/tickets/sell")) {
     return NextResponse.next();
   }
 
+  // CUSTOMER
   if (
     role.value === "CUSTOMER" &&
     (path.startsWith("/tickets/buy") || path === "/vendors")
@@ -29,13 +30,18 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // ADMIN
+  if (role.value === "ADMIN" && (path === "/users" || path === "/dashboard")) {
+    return NextResponse.next();
+  }
+
   return NextResponse.redirect(
     new URL("/auth?reason=unauthorized", request.url)
   );
 }
 
 export const config = {
-  matcher: ["/tickets/:path*", "/user", "/vendors"],
+  matcher: ["/tickets/:path*", "/user", "/vendors", "/users", "/dashboard"],
 };
 
 function getCookiesToken(request: NextRequest) {
