@@ -1,7 +1,6 @@
 import { createHttpClient } from "./httpClient";
 import { getCookieTokens } from "./BasicCrud";
 
-
 export async function getUser() {
   const tokenData = await getCookieTokens();
   const path = "/user";
@@ -15,8 +14,9 @@ export async function getUser() {
     } else {
       return null;
     }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.error("Error:", error);
+    // console.error("Error:", error);
+    return null;
   }
-  return null;
 }

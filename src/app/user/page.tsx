@@ -10,6 +10,8 @@ import {
 import { useEffect, useState } from "react";
 import { getUser } from "../lib/UserCrud";
 import { usePathname } from "next/navigation";
+import { SkeletonCard } from "@/components/UserSkeleton";
+import { useToast } from "@/hooks/use-toast";
 
 interface UserModel {
   id: number;
@@ -21,6 +23,7 @@ interface UserModel {
 export default function User() {
   const [user, setUser] = useState<UserModel | null>(null);
   const pathname = usePathname();
+  const { toast } = useToast();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -30,14 +33,20 @@ export default function User() {
           setUser(response.data as UserModel);
         } else {
           setUser(null);
+          toast({
+            variant: "destructive",
+            title: "Failed getting user : " + new Date().toLocaleTimeString(),
+            description: "something went wrong...",
+          });
         }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
-        console.error("Failed to fetch user data", error);
+        // console.error("Failed to fetch user data", error);
       }
     };
 
     fetchUser();
-  }, [pathname]);
+  }, [pathname, toast]);
 
   return (
     <section className="pt-10 flex flex-col justify-start items-center w-full min-h-screen">
@@ -71,11 +80,11 @@ export default function User() {
               <strong>Email:</strong> {user.email}
             </p>
             <p>
-              <strong>Role:</strong> {user.role}
+              <strong>Access:</strong> {user.role}
             </p>
           </div>
         ) : (
-          <p>Loading...</p>
+          <SkeletonCard />
         )}
       </div>
     </section>

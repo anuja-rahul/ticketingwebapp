@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { getCookieTokens } from "@/app/lib/BasicCrud";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+// import { Badge } from "@/components/ui/badge";
 
 interface Cookies {
   token: { name: string; value: string; path: string };
@@ -34,15 +34,8 @@ export function UserIcon() {
   }, [cookies]);
 
   return email ? (
-    <p className="text-xs rounded-2xl p-2">{email}</p>
+    <p className="text-xs rounded-2xl text-balance text-center p-2 min-w-32">{email}</p>
   ) : (
-    <Avatar className="bg-muted-foreground">
-      <AvatarImage
-        src="https://assets.dryicons.com/uploads/icon/svg/5610/fff0263a-8f19-4b74-8f3d-fc24b9561a96.svg"
-        alt="@shadcn"
-      />
-      <Badge>Badge</Badge>
-      <AvatarFallback>CN</AvatarFallback>
-    </Avatar>
+    <p className="text-xs rounded-2xl text-balance text-center p-2 min-w-32">User</p>
   );
 }
