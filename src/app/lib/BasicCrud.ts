@@ -13,7 +13,7 @@ export type tokenDataSchema = z.infer<typeof dataSchema>;
 // Send the cookie data to be saved
 export async function sendCookieData(data: tokenDataSchema) {
   try {
-    const response = await fetch("/api/cookies/set", {
+    const response = await fetch("/api/cookies", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export async function sendCookieData(data: tokenDataSchema) {
 // Deletes the cookies
 export async function deleteCookies() {
   try {
-    const response = await fetch("/api/cookies/delete", {
+    const response = await fetch("/api/cookies", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ async function checkAuth(path: string, token: { token: { value: string } }) {
 // Get all 3 cookies (token, role, username[email])
 export async function getCookieTokens() {
   try {
-    const response = await fetch("/api/cookies/get", {
+    const response = await fetch("/api/cookies", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

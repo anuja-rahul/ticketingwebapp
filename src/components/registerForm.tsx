@@ -47,7 +47,6 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
     createHttpClient()
       .post("/auth/register", data)
       .then(async (response) => {
-        // testing for package return
         const userData = response.data;
         const result = await sendCookieData(userData);
         console.log(response.data);

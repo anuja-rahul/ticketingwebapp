@@ -41,6 +41,8 @@ export default function Status() {
 
       if (backendAPI) {
         setBackNormal(true);
+      } else {
+        setBackNormal(false);
       }
     } catch (error) {
       console.error(error);
@@ -287,7 +289,9 @@ export default function Status() {
                 <AllSystemsState />
               </TableCell>
               <TableCell>All services</TableCell>
-              <TableCell className="text-xs">Check all services in one go</TableCell>
+              <TableCell className="text-xs">
+                Check all services in one go
+              </TableCell>
               <TableCell className="text-right">
                 <Button
                   className="hover:border-muted-foreground/30 duration-300"
