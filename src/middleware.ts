@@ -13,6 +13,7 @@ export function middleware(request: NextRequest) {
   const url = new URL(request.url);
   const path = url.pathname;
 
+  // Check role and paths
   if (role.value === "VENDOR" && path.startsWith("/tickets/sell")) {
     return NextResponse.next();
   }
@@ -21,6 +22,10 @@ export function middleware(request: NextRequest) {
     role.value === "CUSTOMER" &&
     (path.startsWith("/tickets/buy") || path === "/vendors")
   ) {
+    return NextResponse.next();
+  }
+
+  if (path === "/user") {
     return NextResponse.next();
   }
 

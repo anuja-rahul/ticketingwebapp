@@ -19,37 +19,69 @@ import {
 import Image from "next/image";
 import { SidebarTrigger } from "./sidebar";
 import LogoLink from "../LogoLink";
+import {
+  AdminBadge,
+  AnyBadge,
+  CustomerBadge,
+  VendorBadge,
+} from "../roleBadges";
 
-const components: { title: string; href: string; description: string }[] = [
+type Role = "vendor" | "customer" | "admin" | "any";
+
+interface TitleAccessProps {
+  title: string;
+  role: Role;
+}
+
+function TitleAccess({ title, role }: TitleAccessProps) {
+  return (
+    <div>
+      <span className="">{title}</span>
+      {role === "vendor" && <VendorBadge />}
+      {role === "customer" && <CustomerBadge />}
+      {role === "admin" && <AdminBadge />}
+      {role === "any" && <AnyBadge />}
+    </div>
+  );
+}
+
+const components: {
+  title:
+    | React.ReactElement<unknown, string | React.JSXElementConstructor<unknown>>
+    | string
+    | undefined;
+  href: string;
+  description: string;
+}[] = [
   {
-    title: "Buy tickets",
+    title: TitleAccess({ title: "Buy Tickets", role: "customer" }),
     href: "/tickets/buy",
     description:
       "Select and purchase tickets from a wide range of dynamically updated collection of events.",
   },
   {
-    title: "Sell tickets",
+    title: TitleAccess({ title: "Sell Tickets", role: "vendor" }),
     href: "/tickets/sell",
     description:
       "Looking for a place to sell your tickets ? TicketingApp is the right place for you.",
   },
   {
-    title: "Dashboard",
+    title: TitleAccess({ title: "Dashboard", role: "admin" }),
     href: "/dashboard",
-    description: "get the latest staistics about our platform.",
+    description: "get the latest statistics about our platform.",
   },
   {
-    title: "Profile",
+    title: TitleAccess({ title: "Profile", role: "any" }),
     href: "/user",
     description: "want to checkout your profile ?",
   },
   {
-    title: "Vendors",
+    title: TitleAccess({ title: "Vendors", role: "customer" }),
     href: "/vendors",
     description: "View a summerized preview of all our vendors.",
   },
   {
-    title: "System",
+    title: TitleAccess({ title: "System", role: "any" }),
     href: "/status",
     description: "Wanna see whats running under the hood ?",
   },
@@ -105,7 +137,7 @@ export function Navbar() {
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (
                 <ListItem
-                  key={component.title}
+                  key={component.href}
                   title={component.title}
                   href={component.href}
                 >

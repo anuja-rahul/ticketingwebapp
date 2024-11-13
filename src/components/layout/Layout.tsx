@@ -29,7 +29,7 @@ export default function Layout({ children }: LayoutProps) {
         <SidebarProvider defaultOpen={false}>
           <AppSidebar />
           <main className="w-full min-h-screen bg-gradient-to-b from-background to-secondary">
-            <div className="flex justify-center items-center layout w-full top-0 fixed">
+            <div className="flex justify-center items-center layout w-[90%] top-0 fixed">
               <div
                 id="nav"
                 className="w-4/5 flex flex-row align-middle justify-between h-10 items-center p-7 pr-4 pl-2 rounded-3xl 
