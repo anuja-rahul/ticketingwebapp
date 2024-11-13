@@ -49,9 +49,9 @@ const components: { title: string; href: string; description: string }[] = [
     description: "View a summerized preview of all our vendors.",
   },
   {
-    title: "Home",
-    href: "/",
-    description: "Feeling lost ? Get back to home.",
+    title: "System",
+    href: "/status",
+    description: "Wanna see whats running under the hood ?",
   },
 ];
 
@@ -147,7 +147,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
             {children}
           </p>
         </a>

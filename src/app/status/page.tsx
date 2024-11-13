@@ -32,7 +32,6 @@ export default function Status() {
   const [frontNormal, setFrontNormal] = React.useState<boolean>(false);
   const [backNormal, setBackNormal] = React.useState<boolean>(false);
 
-
   const pathname = usePathname();
 
   const testBackend = async () => {
@@ -258,10 +257,10 @@ export default function Status() {
         <Separator className="my-4 bg-muted-foreground w-3/5" />
 
         <Table>
-          <TableCaption>All neccessaroy services.</TableCaption>
+          <TableCaption>All necessary services.</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Indicator</TableHead>
+              <TableHead className="w-[100px]"></TableHead>
               <TableHead>State</TableHead>
               <TableHead>Service</TableHead>
               <TableHead>Description</TableHead>
@@ -272,7 +271,7 @@ export default function Status() {
             {data.map((item) => (
               <TableRow key={item.service}>
                 <TableCell className="font-medium">{item.indicator}</TableCell>
-                <TableCell className="w-52">{item.state}</TableCell>
+                <TableCell className="min-w-52 ">{item.state}</TableCell>
                 <TableCell className="text-sm w-52">{item.service}</TableCell>
                 <TableCell className="text-xs">{item.description}</TableCell>
                 <TableCell className="text-right">{item.run}</TableCell>
@@ -287,7 +286,8 @@ export default function Status() {
               <TableCell>
                 <AllSystemsState />
               </TableCell>
-              <TableCell colSpan={2}>All services</TableCell>
+              <TableCell>All services</TableCell>
+              <TableCell className="text-xs">Check all services in one go</TableCell>
               <TableCell className="text-right">
                 <Button
                   className="hover:border-muted-foreground/30 duration-300"
