@@ -8,7 +8,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-export default function Sell() {
+export default function User() {
   return (
     <section className="pt-10 flex flex-col justify-start items-center w-full min-h-screen">
       <div className="flex flex-col items-start justify-start w-full">
@@ -19,18 +19,14 @@ export default function Sell() {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/tickets">tickets</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/tickets/buy">buy</BreadcrumbLink>
+              <BreadcrumbLink href="/user">user</BreadcrumbLink>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </div>
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-foreground text-4xl my-4 text-balance text-center font-bold">
-          Buy Tickets
+          User Profile
         </h1>
         <p className="mb-2">Womp Womp</p>
       </div>

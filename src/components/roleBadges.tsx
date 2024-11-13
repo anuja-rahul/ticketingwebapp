@@ -10,7 +10,7 @@ export function VendorBadge() {
 
 export function CustomerBadge() {
   return (
-    <Badge variant="outline" className="scale-75 bg-yellow-300/40 py-1 px-2">
+    <Badge variant="outline" className="scale-75 bg-green-300/40 py-1 px-2">
       Customers
     </Badge>
   );

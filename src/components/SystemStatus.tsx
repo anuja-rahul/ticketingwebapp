@@ -19,6 +19,8 @@ export default function SystemStatus() {
       const backendAPI = await TestAPI();
       if (backendAPI) {
         setBackNormal(true);
+      } else {
+        setBackNormal(false);
       }
     } catch (error) {
       console.error(error);
@@ -32,7 +34,11 @@ export default function SystemStatus() {
     setIsFrontLoading(true);
     try {
       const frontendAPI = await TestServerRoutes();
-      setFrontNormal(frontendAPI);
+      if (frontendAPI) {
+        setFrontNormal(true);
+      } else {
+        setFrontNormal(false);
+      }
     } catch (error) {
       console.error(error);
       setFrontNormal(false);

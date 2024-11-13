@@ -15,7 +15,7 @@ export default function NotFound() {
         <Breadcrumb className="ml-8">
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/tickets">not-found</BreadcrumbLink>
+              <BreadcrumbLink href="/">not-found</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
           </BreadcrumbList>

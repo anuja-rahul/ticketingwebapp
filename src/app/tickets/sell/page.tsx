@@ -16,6 +16,10 @@ export default function Sell() {
       <div className="flex flex-col items-start justify-start w-full">
         <Breadcrumb className="ml-8">
           <BreadcrumbList>
+          <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink href="/tickets">tickets</BreadcrumbLink>
             </BreadcrumbItem>

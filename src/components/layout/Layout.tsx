@@ -32,13 +32,13 @@ export default function Layout({ children }: LayoutProps) {
             <div className="flex justify-center items-center layout w-[90%] top-0 fixed">
               <div
                 id="nav"
-                className="w-4/5 flex flex-row align-middle justify-between h-10 items-center p-7 pr-4 pl-2 rounded-3xl 
+                className="max-w-[90%] w-4/5 flex flex-row align-middle justify-between h-10 items-center p-7 pr-4 pl-2 rounded-3xl 
                 bg-gradient-to-r from-primary/1 via-muted-foreground/10 to-primary/1 border"
-              >
+               >
                 {/* navbar */}
                 <Navbar />
                 {/* navbar */}
-                <div className="flex flex-row justify-end items-center w-1/3 h-full gap-4">
+                <div className="flex flex-row justify-end items-center max-w-1/3 h-full gap-2">
                   <MyKBD />
                   {/* Login Logout Signin */}
                   <LoginLogoutBtn />

@@ -89,7 +89,7 @@ const components: {
 
 export function Navbar() {
   return (
-    <NavigationMenu className="w-full z-[999] highest opacity-100">
+    <NavigationMenu className="w-auto max-w-full z-[999] highest opacity-100 flex flex-row items-start justify-start">
       <SidebarTrigger />
       <NavigationMenuList className="pl-2">
         <LogoLink />
@@ -107,7 +107,7 @@ export function Navbar() {
                   >
                     {/* <Icons.logo className="h-6 w-6" /> */}
                     <Image src={Image3} alt="image1" className="rounded-xl" />
-                    <div className="mb-2 mt-4 text-lg font-medium">
+                    <div className="mb-2 mt-4 text-lg font-medium w-auto">
                       TicketingApp
                     </div>
                     <p className="text-sm leading-tight text-muted-foreground">

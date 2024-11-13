@@ -67,21 +67,26 @@ export default function Auth() {
           <p>Sign up or login to get started.</p>
         </div>
         <Separator className="my-4 bg-muted-foreground w-3/5" />
-        <div className="flex h-5 items-center space-x-4 text-sm">
+        <div className="flex h-5 items-center space-x-4 text-sm mt-4 duration-300">
           <Link
             href="/auth/signup"
             className={`${buttonVariants({
-              variant: "link",
-            })} font-bold hover:text-secondary-foreground duration-300 hover:translate-y-[-2px]`}
+              variant: "outline",
+            })} font-bold hover:translate-y-[-2px] bg-gradient-to-r 
+            from-background/10 via-primary/20 to-background/10 border-muted-foreground/30 def_btn`}
           >
             Signup
           </Link>
-          <Separator orientation="vertical" className="bg-muted-foreground" />
+          <Separator
+            orientation="vertical"
+            className="bg-muted-foreground h-12"
+          />
           <Link
             href="/auth/login"
             className={`${buttonVariants({
-              variant: "link",
-            })} font-bold hover:text-secondary-foreground duration-300 hover:translate-y-[-2px]`}
+              variant: "outline",
+            })} font-bold hover:translate-y-[-2px] bg-gradient-to-r 
+            from-background/10 via-primary/20 to-background/10 border-muted-foreground/30 def_btn`}
           >
             Login
           </Link>

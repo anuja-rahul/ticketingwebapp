@@ -12,6 +12,7 @@ import {
 import { LockIcon } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
+import clsx from "clsx";
 
 interface Cookies {
   token: { name: string; value: string; path: string };
@@ -19,7 +20,13 @@ interface Cookies {
   role: { name: string; value: string; path: string };
 }
 
-export default function LoginLogoutBtn() {
+interface LoginLogoutBtnProps {
+  className?: string;
+}
+
+export default function LoginLogoutBtn({
+  className = "",
+}: LoginLogoutBtnProps) {
   const pathname = usePathname();
   const [cookies, setCookies] = useState<Cookies | null>(null);
   const [username, setUsername] = useState<string | null>(null);
@@ -63,7 +70,7 @@ export default function LoginLogoutBtn() {
 
   return (
     <>
-      <div className="border rounded-2xl">
+      <div className={clsx("border rounded-2xl", className)}>
         <TooltipProvider delayDuration={0}>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -71,23 +78,27 @@ export default function LoginLogoutBtn() {
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="flex items-center justify-center scale-100 duration-300 hover:translate-y-[-2px] 
-                  hover:bg-muted-foreground/20 rounded-2xl p-2 text-xs"
+                  className={clsx(
+                    "flex items-center justify-center scale-100 duration-300 hover:translate-y-[-2px] hover:bg-muted-foreground/20 rounded-2xl p-2 text-xs",
+                    className
+                  )}
                 >
                   Logout
                 </button>
               ) : (
                 <Link href="/auth">
                   <div
-                    className="flex items-center justify-center scale-100 duration-300 hover:translate-y-[-2px] 
-                    hover:bg-muted-foreground/20 rounded-2xl p-2"
+                    className={clsx(
+                      "flex items-center justify-center scale-100 duration-300 hover:translate-y-[-2px] hover:bg-muted-foreground/20 rounded-2xl p-2",
+                      className
+                    )}
                   >
                     <LockIcon />
                   </div>
                 </Link>
               )}
             </TooltipTrigger>
-            <TooltipContent className="text-xs pt-2">
+            <TooltipContent className="text-xs py-2">
               <p>{username ? "Logout" : "login/signup"}</p>
             </TooltipContent>
           </Tooltip>

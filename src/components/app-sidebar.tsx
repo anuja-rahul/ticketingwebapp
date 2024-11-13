@@ -64,7 +64,7 @@ const items = [
     icon: LayoutList,
   },
   {
-    title: "Signout",
+    title: "Logout",
     url: "/auth/signout",
     icon: LogOut,
   },
