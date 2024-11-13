@@ -38,7 +38,7 @@ export default function Layout({ children }: LayoutProps) {
                 {/* navbar */}
                 <Navbar />
                 {/* navbar */}
-                <div className="flex flex-row justify-end items-center w-1/4 h-full gap-4">
+                <div className="flex flex-row justify-end items-center w-1/3 h-full gap-4">
                   <MyKBD />
                   <TooltipProvider delayDuration={0}>
                     <Tooltip>
