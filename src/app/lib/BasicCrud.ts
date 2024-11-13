@@ -25,7 +25,6 @@ export async function sendCookieData(data: tokenDataSchema) {
     console.log("Result:", result);
 
     if (response.status == 201) {
-      // console.log("Error:", result);
       return true;
     } else {
       return false;
@@ -63,20 +62,19 @@ export async function deleteCookies() {
 async function checkAuth(path: string, token: { token: { value: string } }) {
   console.log("token value", token.token.value);
 
-  createHttpClient({ Authorization: "Bearer " + token.token.value })
-    .get(path)
-    .then(async (response) => {
-      if (response.status == 200) {
-        return true;
-      } else {
-        // if not valid delete the cookies
-        await deleteCookies();
-        return false;
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  try {
+    const response = await createHttpClient({
+      Authorization: "Bearer " + token.token.value,
+    }).get(path);
+    if (response.status == 200) {
+      return true;
+    } else {
+      await deleteCookies();
+      return false;
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
   return false;
 }
 
