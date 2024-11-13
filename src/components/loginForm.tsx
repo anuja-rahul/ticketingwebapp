@@ -132,7 +132,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
     if (success) {
       setTimeout(() => {
         window.location.href = "/";
-      }, 3000);
+      }, 2000);
     }
   }, [success]);
 

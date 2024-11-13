@@ -44,18 +44,21 @@ export async function deleteCookies() {
       },
     });
 
-    const result = await response.json();
-    console.log("Result:", result);
+    console.log("Response status:", response.status);
 
-    if (response.status == 204) {
+    if (response.status === 204) {
       return true;
     } else {
+      const result = await response.json();
+      console.log("Result:", result);
       return false;
     }
   } catch (error) {
     console.error("Error:", error);
+    return false;
   }
 }
+
 
 // child
 // send a GET request to demo controller to check for validity of tokens
