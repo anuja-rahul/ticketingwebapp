@@ -11,7 +11,7 @@ import {
 
 export default function Signup() {
   return (
-    <section className="pt-10 flex flex-col justify-center items-center w-full">
+    <section className="pt-10 flex flex-col justify-start items-center w-full min-h-svh">
       <div className="flex flex-col items-start justify-start w-full">
         <Breadcrumb className="ml-8">
           <BreadcrumbList>

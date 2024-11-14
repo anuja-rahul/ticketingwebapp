@@ -34,7 +34,7 @@ export default function Layout({ children }: LayoutProps) {
                 id="nav"
                 className="max-w-[90%] w-4/5 flex flex-row align-middle justify-between h-10 items-center p-7 pr-4 pl-2 rounded-3xl 
                 bg-gradient-to-r from-primary/1 via-muted-foreground/10 to-primary/1 border"
-               >
+              >
                 {/* navbar */}
                 <Navbar />
                 {/* navbar */}
@@ -62,7 +62,7 @@ export default function Layout({ children }: LayoutProps) {
               </div>
             </div>
             <div className="layout w-full mt-8">{children}</div>
-            <div className="w-full flex flex-col items-center justify-end bottom-0 mt-10">
+            <div className="w-svw flex flex-col items-center justify-end bottom-0 mt-10">
               <Footer />
             </div>
           </main>
