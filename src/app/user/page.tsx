@@ -63,11 +63,11 @@ export default function User() {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center h-auto">
         <h1 className="text-foreground text-4xl my-4 text-balance text-center font-bold">
           User Profile
         </h1>
-        <p className="mb-2">Welcome to your profile</p>
+        <p className="mb-2">Womp Womp</p>
         {user ? (
           <div className="p-4 border rounded-md shadow-md">
             <p>

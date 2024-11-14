@@ -53,7 +53,7 @@ export default function SystemStatus() {
   }, [pathname]);
 
   return (
-    <div className="w-full">
+    <div className="flex flex-col items-center justify-center flex-wrap w-auto">
       {isBackLoading || isFrontLoading ? (
         <div className="flex items-center">
           <Indicator className="bg-yellow-300" />
