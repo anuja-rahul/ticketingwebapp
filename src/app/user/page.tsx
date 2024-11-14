@@ -23,7 +23,10 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { CircleX, RefreshCcw } from "lucide-react";
 import React from "react";
-import CustomerTable from "@/components/CustomerTable";
+// import CustomerTable from "@/components/DataTables/CustomerTable/CustomerTable";
+import ActionButton from "@/components/DataTables/CustomerTable/ActionButton";
+import { DataTable } from "@/components/DataTables/CustomerTable/Data-Table";
+import { TicketColumns } from "@/components/DataTables/CustomerTable/columns";
 
 interface UserModel {
   id: number;
@@ -48,6 +51,10 @@ interface CustomerTicketStats {
   ticketsBought: number;
 }
 
+interface CustomerTicketStatsAction extends CustomerTicketStats {
+  action: React.ReactNode;
+}
+
 export default function User() {
   const [user, setUser] = useState<UserModel | null>(null);
   const [vendorStats, setVendorStats] = useState<VendorStats[] | null>(null);
@@ -56,6 +63,9 @@ export default function User() {
   >(null);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<boolean>(true);
+  const [customerStatsAction, setCustomerStatsAction] = useState<
+    CustomerTicketStatsAction[] | null
+  >(null);
 
   const pathname = usePathname();
   const { toast } = useToast();
@@ -113,8 +123,15 @@ export default function User() {
       const response = await getCustomerTicketConfigs();
       if (response?.data) {
         setCustomerStats(response.data);
+        const customerStatsWithActions: CustomerTicketStatsAction[] =
+          response.data.map((stat) => ({
+            ...stat,
+            action: <ActionButton eventName={stat.eventName} />,
+          }));
+        setCustomerStatsAction(customerStatsWithActions);
       } else {
         setCustomerStats(null);
+        setCustomerStatsAction(null);
         toast({
           variant: "destructive",
           title:
@@ -136,7 +153,6 @@ export default function User() {
 
   useEffect(() => {
     if (!user) return;
-
     if (user.role === "VENDOR") {
       getVendorStats();
     } else if (user.role === "CUSTOMER") {
@@ -200,7 +216,10 @@ export default function User() {
                     size="sm"
                     className="text-primary hover:bg-primary/10 flex 
                     items-center space-x-2 duration-300 hover:translate-y-[-4px] def_btn hover:text-foreground hover:border-primary/30"
-                    onClick={fetchUser}
+                    onClick={() => {
+                      fetchUser();
+                      getCustomerStats();
+                    }}
                   >
                     <RefreshCcw className="h-4 w-4" />
                     <span>Refresh</span>
@@ -251,14 +270,19 @@ export default function User() {
             </div>
           ) : user?.role === "CUSTOMER" && customerStats ? (
             <div className="mt-4 w-screen px-10 flex flex-col items-center justify-start">
-              <h2 className="text-3xl text-center text-balance font-bold">
+              <h2 className="text-3xl text-center text-balance font-bold my-2">
                 Purchase History
               </h2>
-              <Separator className="my-4 bg-muted-foreground w-2/5" />
+              <Separator className="my-8 bg-muted-foreground w-2/5" />
+
               <div className="w-4/5">
-                <CustomerTable />
+                <DataTable
+                  columns={TicketColumns}
+                  data={customerStatsAction || []}
+                />
               </div>
-              <ul className="max-h-80 overflow-y-auto w-4/5 mt-5">
+
+              {/* <ul className="max-h-80 overflow-y-auto w-4/5 mt-5">
                 {customerStats.map((customer, index) => (
                   <li
                     key={`${customer.customerEmail}-${customer.eventName}-${index}`}
@@ -275,7 +299,7 @@ export default function User() {
                     </p>
                   </li>
                 ))}
-              </ul>
+              </ul> */}
             </div>
           ) : (
             message ?? <p className="my-2">Loading history...</p>
