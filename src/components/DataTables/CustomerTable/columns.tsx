@@ -29,29 +29,43 @@ export const TicketColumns: ColumnDef<Ticket>[] = [
     accessorKey: "eventName",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Event Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <div className="flex justify-end">
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Event Name
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
       );
     },
+    cell: ({ cell }) => (
+      <div className="text-right mr-8">
+        {cell.getValue() as React.ReactNode}
+      </div>
+    ),
   },
   {
     accessorKey: "ticketsBought",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Tickets Bought
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <div className="flex justify-end">
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            {" "}
+            Tickets Bought <ArrowUpDown className="ml-2 h-4 w-4" />{" "}
+          </Button>
+        </div>
       );
     },
+    cell: ({ cell }) => (
+      <div className="text-right mr-8">
+        {cell.getValue() as React.ReactNode}
+      </div>
+    ),
   },
   {
     accessorKey: "action",
