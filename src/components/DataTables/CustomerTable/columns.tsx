@@ -1,9 +1,16 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import React from "react";
 
 export type Ticket = {
@@ -20,17 +27,35 @@ export const TicketColumns: ColumnDef<Ticket>[] = [
   },
   {
     accessorKey: "eventName",
-    header: "Event Name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Event Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "ticketsBought",
-    header: "Tickets Bought",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Tickets Bought
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "action",
-    header: () => (
-      <div className="text-center">Action</div>
-    ),
+    header: () => <div className="text-center">Action</div>,
     cell: ({ row }) => (
       <div className="flex flex-row justify-start items-start">
         {row.original.action}
@@ -40,8 +65,8 @@ export const TicketColumns: ColumnDef<Ticket>[] = [
   {
     id: "extras",
     cell: ({ row }) => {
-      const ticket = row.original
- 
+      const ticket = row.original;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -62,7 +87,7 @@ export const TicketColumns: ColumnDef<Ticket>[] = [
             <DropdownMenuItem>View Vendor</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
 ];

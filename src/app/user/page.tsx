@@ -214,8 +214,8 @@ export default function User() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-primary hover:bg-primary/10 flex 
-                    items-center space-x-2 duration-300 hover:translate-y-[-4px] def_btn hover:text-foreground hover:border-primary/30"
+                    className="text-foreground hover:bg-primary/10 flex items-center space-x-2 duration-300 
+                    hover:translate-y-[-3px] def_btn hover:text-foreground hover:border-primary/30"
                     onClick={() => {
                       fetchUser();
                       getCustomerStats();
