@@ -255,7 +255,9 @@ export default function User() {
                 Purchase History
               </h2>
               <Separator className="my-4 bg-muted-foreground w-2/5" />
-              <CustomerTable />
+              <div className="w-4/5">
+                <CustomerTable />
+              </div>
               <ul className="max-h-80 overflow-y-auto w-4/5 mt-5">
                 {customerStats.map((customer, index) => (
                   <li
