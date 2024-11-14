@@ -258,7 +258,7 @@ export default function Status() {
         </div>
         <Separator className="my-4 bg-muted-foreground w-3/5" />
 
-        <Table>
+        <Table className="z-[1]">
           <TableCaption>All necessary services.</TableCaption>
           <TableHeader>
             <TableRow>

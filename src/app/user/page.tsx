@@ -21,8 +21,9 @@ import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { RefreshCcw } from "lucide-react";
+import { CircleX, RefreshCcw } from "lucide-react";
 import React from "react";
+import CustomerTable from "@/components/CustomerTable";
 
 interface UserModel {
   id: number;
@@ -54,6 +55,7 @@ export default function User() {
     CustomerTicketStats[] | null
   >(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState<boolean>(true);
 
   const pathname = usePathname();
   const { toast } = useToast();
@@ -61,6 +63,7 @@ export default function User() {
   const fetchUser = async () => {
     setIsLoading(true);
     try {
+      setMessage(true);
       const response = await getUser();
       if (response?.data) {
         setUser(response.data as UserModel);
@@ -71,6 +74,7 @@ export default function User() {
           title: "Failed getting user: " + new Date().toLocaleTimeString(),
           description: "Something went wrong...",
         });
+        setMessage(false);
       }
     } catch (error) {
       console.error("Failed to fetch user data", error);
@@ -82,6 +86,7 @@ export default function User() {
   const getVendorStats = async () => {
     setIsLoading(true);
     try {
+      setMessage(true);
       const response = await getVendorConfigs();
       if (response?.data) {
         setVendorStats(response.data);
@@ -93,6 +98,7 @@ export default function User() {
             "Failed getting vendor stats: " + new Date().toLocaleTimeString(),
           description: "Something went wrong...",
         });
+        setMessage(false);
       }
     } catch (error) {
       console.error("Failed to fetch vendor stats", error);
@@ -192,7 +198,8 @@ export default function User() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-primary hover:text-primary/80 hover:bg-primary/10 flex items-center space-x-2"
+                    className="text-primary hover:bg-primary/10 flex 
+                    items-center space-x-2 duration-300 hover:translate-y-[-4px] def_btn hover:text-foreground hover:border-primary/30"
                     onClick={fetchUser}
                   >
                     <RefreshCcw className="h-4 w-4" />
@@ -202,8 +209,13 @@ export default function User() {
               </div>
             </Card>
           </div>
-        ) : (
+        ) : message ? (
           <p>loading profile...</p>
+        ) : (
+          <p className="text-red-700 flex flex-row gap-2">
+            {" "}
+            <CircleX /> Error loading user profile...{" "}
+          </p>
         )}
         <div className="user-page">
           {user?.role === "VENDOR" && vendorStats ? (
@@ -238,11 +250,13 @@ export default function User() {
               </ul>
             </div>
           ) : user?.role === "CUSTOMER" && customerStats ? (
-            <div className="mt-4 w-full max-w-md">
-              <h2 className="text-2xl text-center text-balance">
+            <div className="mt-4 w-screen px-10 flex flex-col items-center justify-start">
+              <h2 className="text-3xl text-center text-balance font-bold">
                 Purchase History
               </h2>
-              <ul className="max-h-80 overflow-y-auto">
+              <Separator className="my-4 bg-muted-foreground w-2/5" />
+              <CustomerTable />
+              <ul className="max-h-80 overflow-y-auto w-4/5 mt-5">
                 {customerStats.map((customer, index) => (
                   <li
                     key={`${customer.customerEmail}-${customer.eventName}-${index}`}
@@ -262,7 +276,7 @@ export default function User() {
               </ul>
             </div>
           ) : (
-            <p className="my-2">Loading history...</p>
+            message ?? <p className="my-2">Loading history...</p>
           )}
         </div>
       </div>
