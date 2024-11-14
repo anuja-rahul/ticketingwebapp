@@ -40,6 +40,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [success, setSuccess] = React.useState<boolean>(false);
   const { toast } = useToast();
+  const timeNow = new Date().toLocaleTimeString();
 
   // async function sendData(data: UserDataSchema) {
   //   // console.log("Sending data:", data);
@@ -76,44 +77,43 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         // testing for package return
         const userData = response.data;
         const result = await sendCookieData(userData);
-        console.log(await checkCookieStatus())
+        console.log(await checkCookieStatus());
         // console.log(userData);
         toast({
           variant: "default",
-          title: "login successful : " + new Date().toLocaleTimeString(),
+          title: "login successful : " + timeNow,
           description:
             "You have logged in successfully, redirecting to home...",
         });
 
         if (result) {
           toast({
-            title: "cookies saved : " + new Date().toLocaleTimeString(),
+            title: "cookies saved : " + timeNow,
             description: "cookies have been saved successfully...",
           });
           setSuccess(true);
         } else {
           toast({
             variant: "destructive",
-            title: "failed saving cookies : " + new Date().toLocaleTimeString(),
+            title: "failed saving cookies : " + timeNow,
             description: "something went wrong while saving cookies...",
           });
         }
       })
       .catch((error) => {
-        if (error.status === 400 ) {
+        if (error.status === 400) {
           toast({
             variant: "destructive",
-            title: "Invalid credentials : " + new Date().toLocaleTimeString(),
+            title: "Invalid credentials : " + timeNow,
             description: "Please check your email and password",
           });
         } else if (error.status === 422) {
           toast({
             variant: "destructive",
-            title: "Invalid password : " + new Date().toLocaleTimeString(),
+            title: "Invalid password : " + timeNow,
             description: "Password must not contain any empty spaces",
           });
-        }
-         else {
+        } else {
           toast({
             variant: "destructive",
             title:

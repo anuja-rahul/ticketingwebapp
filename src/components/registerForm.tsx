@@ -13,6 +13,7 @@ import LoginRegisterCard from "./loginRegisterCard";
 import { useToast } from "@/hooks/use-toast";
 import { TermsAndConditions } from "./termsAndConditions";
 import { sendCookieData } from "@/app/lib/BasicCrud";
+import { useRouter } from "next/navigation";
 
 // import { toast } from "sonner";
 // import { HttpErrorResponse } from "../app/models/http/HttpErrorResponse";
@@ -35,6 +36,8 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [success, setSuccess] = React.useState<boolean>(false);
   const { toast } = useToast();
+  const timeNow = new Date().toLocaleTimeString();
+  const router = useRouter();
 
   // const [errors, setErrors] = React.useState<HttpErrorResponse | undefined>(
   //   undefined
@@ -51,21 +54,20 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
         const result = await sendCookieData(userData);
         console.log(response.data);
         toast({
-          title:
-            "Account cretaed successfully : " + new Date().toLocaleTimeString(),
+          title: "Account cretaed successfully : " + timeNow,
           description:
             "Your account was created successfully, redirecting to home...",
         });
         if (result) {
           toast({
-            title: "cookies saved : " + new Date().toLocaleTimeString(),
+            title: "cookies saved : " + timeNow,
             description: "cookies have been saved successfully...",
           });
           setSuccess(true);
         } else {
           toast({
             variant: "destructive",
-            title: "failed saving cookies : " + new Date().toLocaleTimeString(),
+            title: "failed saving cookies : " + timeNow,
             description: "something went wrong while saving cookies...",
           });
         }
@@ -74,20 +76,20 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
         if (error.status === 400) {
           toast({
             variant: "destructive",
-            title: "Invalid credentials : " + new Date().toLocaleTimeString(),
+            title: "Invalid credentials : " + timeNow,
             description: "Please check your email and password",
           });
         } else if (error.status === 422) {
           toast({
             variant: "destructive",
-            title: "Invalid credentials : " + new Date().toLocaleTimeString(),
+            title: "Invalid credentials : " + timeNow,
             description:
               "Email/Username/Password must not contain any empty spaces",
           });
         } else if (error.status === 409) {
           toast({
             variant: "destructive",
-            title: "Invalid credentials : " + new Date().toLocaleTimeString(),
+            title: "Invalid credentials : " + timeNow,
             description: "Account with email/username already exists",
           });
         } else {
@@ -108,10 +110,11 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
   useEffect(() => {
     if (success) {
       setTimeout(() => {
-        window.location.href = "/";
+        // window.location.href = "/";
+        router.push("/");
       }, 3000);
     }
-  }, [success]);
+  }, [router, success]);
 
   const { register, handleSubmit, formState } = useForm<Schema>({
     resolver: zodResolver(registerSchema),
