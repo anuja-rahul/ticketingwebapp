@@ -28,7 +28,7 @@ import { DataTable } from "@/components/DataTables/DataTable";
 import {
   EventColumns,
   TicketColumns,
-} from "@/components/DataTables/DataColumns";
+} from "@/components/DataTables/ProfileDataColumns";
 import VendorActionButtons from "@/components/DataTables/VendorTable/VendorActionButton";
 
 interface UserModel {

@@ -33,6 +33,9 @@ export default function Sell() {
           Buy Tickets
         </h1>
         <p className="mb-2">Womp Womp</p>
+        <div className="w-4/5">
+        
+        </div>
       </div>
     </section>
   );
