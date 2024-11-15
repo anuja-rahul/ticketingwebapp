@@ -23,10 +23,13 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { CircleX, RefreshCcw } from "lucide-react";
 import React from "react";
-// import CustomerTable from "@/components/DataTables/CustomerTable/CustomerTable";
-import ActionButton from "@/components/DataTables/CustomerTable/ActionButton";
-import { DataTable } from "@/components/DataTables/CustomerTable/Data-Table";
-import { TicketColumns } from "@/components/DataTables/CustomerTable/columns";
+import CustomerActionButtons from "@/components/DataTables/CustomerTable/CustomerActionButton";
+import { DataTable } from "@/components/DataTables/DataTable";
+import {
+  EventColumns,
+  TicketColumns,
+} from "@/components/DataTables/DataColumns";
+import VendorActionButtons from "@/components/DataTables/VendorTable/VendorActionButton";
 
 interface UserModel {
   id: number;
@@ -43,6 +46,10 @@ interface VendorStats {
   ticketReleaseRate: number;
   customerRetrievalRate: number;
   maxTicketCapacity: number;
+}
+
+interface VendorStatAction extends VendorStats {
+  action: React.ReactNode;
 }
 
 interface CustomerTicketStats {
@@ -65,6 +72,9 @@ export default function User() {
   const [message, setMessage] = useState<boolean>(true);
   const [customerStatsAction, setCustomerStatsAction] = useState<
     CustomerTicketStatsAction[] | null
+  >(null);
+  const [vendorStatsAction, setVendorStatsAction] = useState<
+    VendorStatAction[] | null
   >(null);
 
   const pathname = usePathname();
@@ -100,8 +110,16 @@ export default function User() {
       const response = await getVendorConfigs();
       if (response?.data) {
         setVendorStats(response.data);
+        const vendorStatsWithActions: VendorStatAction[] = response.data.map(
+          (stat) => ({
+            ...stat,
+            action: <VendorActionButtons eventName={stat.eventName} />,
+          })
+        );
+        setVendorStatsAction(vendorStatsWithActions);
       } else {
         setVendorStats(null);
+        setVendorStatsAction(null);
         toast({
           variant: "destructive",
           title:
@@ -126,7 +144,7 @@ export default function User() {
         const customerStatsWithActions: CustomerTicketStatsAction[] =
           response.data.map((stat) => ({
             ...stat,
-            action: <ActionButton eventName={stat.eventName} />,
+            action: <CustomerActionButtons eventName={stat.eventName} />,
           }));
         setCustomerStatsAction(customerStatsWithActions);
       } else {
@@ -218,7 +236,11 @@ export default function User() {
                     hover:translate-y-[-3px] def_btn hover:text-foreground hover:border-primary/30"
                     onClick={() => {
                       fetchUser();
-                      getCustomerStats();
+                      if (user?.role === "VENDOR") {
+                        getVendorStats();
+                      } else if (user?.role === "CUSTOMER") {
+                        getCustomerStats();
+                      }
                     }}
                   >
                     <RefreshCcw className="h-4 w-4" />
@@ -238,35 +260,17 @@ export default function User() {
         )}
         <div className="user-page">
           {user?.role === "VENDOR" && vendorStats ? (
-            <div className="mt-4 w-full max-w-md">
-              <h2 className="text-2xl">Event Configurations</h2>
-              <ul className="max-h-80 overflow-y-auto">
-                {vendorStats.map((vendor) => (
-                  <li
-                    key={vendor.id}
-                    className="p-4 border rounded-md shadow-md mt-2"
-                  >
-                    <p>
-                      <strong>Event Name:</strong> {vendor.eventName}
-                    </p>
-                    <p>
-                      <strong>Total Tickets:</strong> {vendor.totalTickets}
-                    </p>
-                    <p>
-                      <strong>Ticket Release Rate:</strong>{" "}
-                      {vendor.ticketReleaseRate}
-                    </p>
-                    <p>
-                      <strong>Customer Retrieval Rate:</strong>{" "}
-                      {vendor.customerRetrievalRate}
-                    </p>
-                    <p>
-                      <strong>Max Ticket Capacity:</strong>{" "}
-                      {vendor.maxTicketCapacity}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+            <div className="mt-4 w-screen px-10 flex flex-col items-center justify-start">
+              <h2 className="text-3xl text-center text-balance font-bold my-2">
+                Event Configurations
+              </h2>
+              <Separator className="my-8 bg-muted-foreground w-2/5" />
+              <div className="w-[85%]">
+                <DataTable
+                  data={vendorStatsAction || []}
+                  columns={EventColumns}
+                />
+              </div>
             </div>
           ) : user?.role === "CUSTOMER" && customerStats ? (
             <div className="mt-4 w-screen px-10 flex flex-col items-center justify-start">
@@ -275,31 +279,12 @@ export default function User() {
               </h2>
               <Separator className="my-8 bg-muted-foreground w-2/5" />
 
-              <div className="w-4/5">
+              <div className="w-[85%]">
                 <DataTable
                   columns={TicketColumns}
                   data={customerStatsAction || []}
                 />
               </div>
-
-              {/* <ul className="max-h-80 overflow-y-auto w-4/5 mt-5">
-                {customerStats.map((customer, index) => (
-                  <li
-                    key={`${customer.customerEmail}-${customer.eventName}-${index}`}
-                    className="p-4 border rounded-md shadow-md mt-2"
-                  >
-                    <p>
-                      <strong>Event Name:</strong> {customer.eventName}
-                    </p>
-                    <p>
-                      <strong>Email:</strong> {customer.customerEmail}
-                    </p>
-                    <p>
-                      <strong>Tickets Bought:</strong> {customer.ticketsBought}
-                    </p>
-                  </li>
-                ))}
-              </ul> */}
             </div>
           ) : (
             message ?? <p className="my-2">Loading history...</p>
