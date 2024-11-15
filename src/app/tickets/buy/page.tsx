@@ -1,5 +1,6 @@
 "use client";
 
+import { DataTable } from "@/components/DataTables/DataTable";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -33,10 +34,10 @@ export default function Sell() {
         <h1 className="text-foreground text-4xl my-4 text-balance text-center font-bold">
           Buy Tickets
         </h1>
-        <Separator className="my-4 bg-muted-foreground w-3/5" />
+        <Separator className="my-4 bg-muted-foreground w-4/5" />
         <p className="mb-2">Womp Womp</p>
         <div className="w-4/5">
-
+          <DataTable columns={[]} data={[]} />
         </div>
       </div>
     </section>
