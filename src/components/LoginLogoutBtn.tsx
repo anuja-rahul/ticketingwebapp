@@ -9,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
-import { LockIcon } from "lucide-react";
+import { LockIcon, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import clsx from "clsx";
@@ -79,11 +79,12 @@ export default function LoginLogoutBtn({
                   type="button"
                   onClick={handleLogout}
                   className={clsx(
-                    "flex items-center justify-center scale-100 duration-300 hover:translate-y-[-2px] hover:bg-muted-foreground/20 rounded-2xl p-2 text-xs",
+                    "flex items-center justify-center scale-100 duration-300 hover:translate-y-[-2px] hover:bg-muted-foreground/20 rounded-2xl p-1 px-2 text-xs flex-row gap-2",
                     className
                   )}
                 >
                   Logout
+                  <LogOut className="scale-75" />
                 </button>
               ) : (
                 <Link href="/auth">

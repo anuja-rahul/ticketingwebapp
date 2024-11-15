@@ -15,7 +15,7 @@ const VendorActionButtons: React.FC<ActionButtonProps> = ({ eventName }) => {
           console.log("Buy button clicked", eventName);
         }}
       >
-        Add
+        Update
       </Button>
       <Button
         variant="destructive"

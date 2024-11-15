@@ -34,7 +34,7 @@ export default function Sell() {
         <h1 className="text-foreground text-4xl my-4 text-balance text-center font-bold">
           Sell Tickets
         </h1>
-        <p className="mb-2">Womp Womp</p>
+        <p className="mb-2">Womp Womp n****</p>
       </div>
     </section>
   );

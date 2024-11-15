@@ -9,8 +9,35 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/hooks/use-toast";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function SignOut() {
+  const { toast } = useToast();
+  const searchParams = useSearchParams();
+  const authParams = searchParams.get("reason");
+  const path = usePathname();
+  const [params, setParams] = useState<boolean | undefined>(undefined);
+
+  useEffect(() => {
+    if (authParams === "pre_existing_session_found") {
+      setParams(true);
+    } else {
+      setParams(false);
+    }
+  }, [authParams, path]);
+
+  useEffect(() => {
+    if (params) {
+      toast({
+        variant: "destructive",
+        title: "Session found : " + new Date().toLocaleTimeString(),
+        description: "ERROR : " + authParams?.toUpperCase(),
+      });
+    }
+  }, [authParams, params, toast]);
+
   return (
     <section className="pt-10 flex flex-col justify-start items-center w-full min-h-screen">
       <div className="flex flex-col items-start justify-start w-full">
