@@ -198,7 +198,7 @@ export default function User() {
         <h1 className="text-foreground text-4xl my-4 text-balance text-center font-bold">
           User Profile
         </h1>
-        <Separator className="my-4 bg-muted-foreground w-3/5" />
+        <Separator className="my-4 bg-muted-foreground w-2/5" />
         {isLoading ? (
           <SkeletonCard />
         ) : user ? (
@@ -265,7 +265,7 @@ export default function User() {
                 Event Configurations
               </h2>
               <Separator className="my-8 bg-muted-foreground w-2/5" />
-              <div className="w-[85%]">
+              <div className="w-[88%]">
                 <DataTable
                   data={vendorStatsAction || []}
                   columns={EventColumns}

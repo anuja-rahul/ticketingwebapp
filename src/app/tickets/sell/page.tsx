@@ -7,6 +7,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
 
 export default function Sell() {
 
@@ -34,6 +35,7 @@ export default function Sell() {
         <h1 className="text-foreground text-4xl my-4 text-balance text-center font-bold">
           Sell Tickets
         </h1>
+        <Separator className="my-4 bg-muted-foreground w-4/5" />
         <p className="mb-2">Womp Womp n****</p>
       </div>
     </section>

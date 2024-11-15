@@ -120,7 +120,19 @@ export const TicketColumns: ColumnDef<Ticket>[] = [
 export const EventColumns: ColumnDef<Event>[] = [
   {
     accessorKey: "id",
-    header: "ID",
+    header: ({column}) => {
+      return (
+        <div className="flex items-start justify-start">
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            ID
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      );
+    },
   },
   {
     accessorKey: "eventName",
