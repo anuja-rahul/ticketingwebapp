@@ -44,7 +44,7 @@ export default function Sell() {
     setIsLoading(false);
   }
 
-  const { create, handleSubmit, formState } = useForm<Schema>({
+  const { register, handleSubmit, formState } = useForm<Schema>({
     resolver: zodResolver(createSchema),
     reValidateMode: "onSubmit",
   });
@@ -93,24 +93,37 @@ export default function Sell() {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid w-full items-center gap-4">
                   <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="name" className="mb-1">
+                    <Label htmlFor="eventName" className="mb-2">
                       Event Name
                     </Label>
-                    <Input id="name" placeholder="Name of your event" />
+                    <Input
+                      type="text"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      disabled={isLoading}
+                      id="eventName"
+                      placeholder="Name of your event"
+                      {...register("eventName")}
+                    />
+                    {formState.errors.eventName && (
+                      <small className="text-red-600">
+                        {formState.errors.eventName.message}
+                      </small>
+                    )}
                   </div>
                   <div className="flex flex-col space-y-1.5"></div>
                 </div>
+                <div className="flex justify-end w-full">
+                  <Button
+                    disabled={isLoading}
+                    type="submit"
+                    className="mt-4 hover:bg-blue-900/60 duration-300 border border-foreground/30"
+                  >
+                    Create
+                  </Button>
+                </div>
               </form>
             </CardContent>
-            <CardFooter className="flex justify-end">
-              <Button
-                disabled={isLoading}
-                type="submit"
-                className="mt-4 hover:bg-blue-900/60 duration-300"
-              >
-                Create
-              </Button>
-            </CardFooter>
           </Card>
         </div>
       </div>
