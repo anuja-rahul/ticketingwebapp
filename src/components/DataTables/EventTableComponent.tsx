@@ -8,6 +8,8 @@ import { getVendorConfigs } from "@/app/lib/UserCrud";
 import { SkeletonCardTable } from "../UserSkeleton";
 import { DataTable } from "./DataTable";
 import { EventColumns } from "./ProfileDataColumns";
+import { Button } from "../ui/button";
+import { RefreshCcw } from "lucide-react";
 
 interface VendorStats {
   id: number;
@@ -86,6 +88,18 @@ export default function EventTableComponent({
         </div>
       ) : (
         <div className="w-[88%]">
+          <div className="w-full flex flex-col items-end justify-start">
+            <Button
+              className="border border-primary/40"
+              variant={"outline"}
+              onClick={() => {
+                getVendorStats();
+              }}
+            >
+              <RefreshCcw className="h-4 w-4" />
+              Refresh
+            </Button>
+          </div>
           <DataTable columns={EventColumns} data={vendorStatsAction || []} />
         </div>
       )}

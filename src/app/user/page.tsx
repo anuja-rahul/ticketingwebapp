@@ -15,7 +15,7 @@ import {
   // getVendorConfigs,
 } from "../lib/UserCrud";
 import { usePathname } from "next/navigation";
-import { SkeletonCard } from "@/components/UserSkeleton";
+import { SkeletonCard, SkeletonCardTable } from "@/components/UserSkeleton";
 import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
@@ -25,9 +25,7 @@ import { CircleX, RefreshCcw } from "lucide-react";
 import React from "react";
 import CustomerActionButtons from "@/components/DataTables/CustomerTable/CustomerActionButton";
 import { DataTable } from "@/components/DataTables/DataTable";
-import {
-  TicketColumns,
-} from "@/components/DataTables/ProfileDataColumns";
+import { TicketColumns } from "@/components/DataTables/ProfileDataColumns";
 // import VendorActionButtons from "@/components/DataTables/VendorTable/VendorActionButton";
 import EventTableComponent from "@/components/DataTables/EventTableComponent";
 
@@ -173,8 +171,8 @@ export default function User() {
     if (!user) return;
     // if (user.role === "VENDOR") {
     //   getVendorStats();
-    // } 
-    // else 
+    // }
+    // else
     if (user.role === "CUSTOMER") {
       getCustomerStats();
     }
@@ -240,7 +238,7 @@ export default function User() {
                       fetchUser();
                       // if (user?.role === "VENDOR") {
                       //   getVendorStats();
-                      // } else 
+                      // } else
                       if (user?.role === "CUSTOMER") {
                         getCustomerStats();
                       }
@@ -268,6 +266,7 @@ export default function User() {
                 Event Configurations
               </h2>
               <Separator className="my-8 bg-muted-foreground w-2/5" />
+
               {/* <div className="w-[88%]">
                 <DataTable
                   data={vendorStatsAction || []}
@@ -284,10 +283,28 @@ export default function User() {
               <Separator className="my-8 bg-muted-foreground w-2/5" />
 
               <div className="w-[85%]">
-                <DataTable
-                  columns={TicketColumns}
-                  data={customerStatsAction || []}
-                />
+                <div className="w-full flex flex-col items-end justify-start">
+                  <Button
+                    className="border border-primary/40"
+                    variant={"outline"}
+                    onClick={() => {
+                      getCustomerStats();
+                    }}
+                  >
+                    <RefreshCcw className="h-4 w-4" />
+                    Refresh
+                  </Button>
+                </div>
+                {!isLoading ? (
+                  <DataTable
+                    columns={TicketColumns}
+                    data={customerStatsAction || []}
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center w-full h-auto">
+                    <SkeletonCardTable />
+                  </div>
+                )}
               </div>
             </div>
           ) : (

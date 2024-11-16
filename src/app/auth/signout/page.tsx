@@ -32,7 +32,7 @@ export default function SignOut() {
     if (params) {
       toast({
         variant: "destructive",
-        title: "Session found : " + new Date().toLocaleTimeString(),
+        title: "Logout first : " + new Date().toLocaleTimeString(),
         description: "ERROR : " + authParams?.toUpperCase(),
       });
     }
