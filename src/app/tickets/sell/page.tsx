@@ -1,6 +1,6 @@
 "use client";
 
-import { DataTable } from "@/components/DataTables/DataTable";
+import EventTableComponent from "@/components/DataTables/EventTableComponent";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -30,16 +30,28 @@ export default function Sell() {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center w-full">
         <h1 className="text-foreground text-4xl my-4 text-balance text-center font-bold">
           Sell Tickets
         </h1>
-        <Separator className="my-4 bg-muted-foreground w-4/5" />
-        <p className="mb-2">Womp Womp n****</p>
+        <Separator className="my-4 bg-muted-foreground w-2/5" />
+        <p className="mb-2 text-center text-balance flex-wrap px-4 w-4/5">
+        <span className="text-primary/80">Review</span>, <span className="text-yellow-500/80">Update</span> or 
+          <span className="text-destructive"> Delete</span> any or all the tickets you have up for sale.
+        </p>
       </div>
-      <div className="w-4/5">
-        <DataTable columns={[]} data={[]} />
-      </div>
+      <EventTableComponent />
+      {/* <div className="flex flex-col items-center justify-center">
+        {isLoading ? (
+          <div className="flex flex-col items-center justify-center w-4/5 mt-16">
+            <SkeletonCardTable />
+          </div>
+        ) : (
+          <div className="w-[88%] flex flex-col items-center justify-center">
+            <DataTable columns={EventColumns} data={vendorStatsAction || []} />
+          </div>
+        )}
+      </div> */}
     </section>
   );
 }
