@@ -1,7 +1,7 @@
 "use client";
 
 import { DataTable } from "@/components/DataTables/DataTable";
-import EventTableComponent from "@/components/DataTables/EventTableComponent";
+import { EventColumns } from "@/components/DataTables/ProfileDataColumns";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -31,15 +31,14 @@ export default function Sell() {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center w-full">
         <h1 className="text-foreground text-4xl my-4 text-balance text-center font-bold">
           Buy Tickets
         </h1>
         <Separator className="my-4 bg-muted-foreground w-4/5" />
         <p className="mb-2">Womp Womp</p>
-        <div className="w-4/5">
-          <EventTableComponent />
-          {/* <DataTable columns={[]} data={[]} /> */}
+        <div className="w-[88%]">
+          <DataTable columns={EventColumns} data={[]} />
         </div>
       </div>
     </section>
