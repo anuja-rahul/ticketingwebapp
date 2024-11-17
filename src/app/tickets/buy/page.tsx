@@ -1,6 +1,7 @@
 "use client";
 
 import { DataTable } from "@/components/DataTables/DataTable";
+import EventTableComponent from "@/components/DataTables/EventTableComponent";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -37,7 +38,8 @@ export default function Sell() {
         <Separator className="my-4 bg-muted-foreground w-4/5" />
         <p className="mb-2">Womp Womp</p>
         <div className="w-4/5">
-          <DataTable columns={[]} data={[]} />
+          <EventTableComponent />
+          {/* <DataTable columns={[]} data={[]} /> */}
         </div>
       </div>
     </section>
