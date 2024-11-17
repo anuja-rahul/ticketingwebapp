@@ -11,7 +11,7 @@ import { EventColumns } from "./ProfileDataColumns";
 import { Button } from "../ui/button";
 import { RefreshCcw } from "lucide-react";
 
-interface VendorStats {
+export interface VendorStats {
   id: number;
   eventName: string;
   email: string;
@@ -21,11 +21,11 @@ interface VendorStats {
   maxTicketCapacity: number;
 }
 
-interface VendorStatAction extends VendorStats {
+export interface VendorStatAction extends VendorStats {
   action: React.ReactNode;
 }
 
-interface EventTableComponentProps {
+export interface EventTableComponentProps {
   SpecialButton?: React.ComponentType<ActionButtonProps>;
 }
 

@@ -67,6 +67,8 @@ export default function User() {
     CustomerTicketStats[] | null
   >(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isTableLoading, setIsTableLoading] = useState(false);
+
   const [message, setMessage] = useState<boolean>(true);
   const [customerStatsAction, setCustomerStatsAction] = useState<
     CustomerTicketStatsAction[] | null
@@ -134,7 +136,7 @@ export default function User() {
   // };
 
   const getCustomerStats = async () => {
-    setIsLoading(true);
+    setIsTableLoading(true);
     try {
       const response = await getCustomerTicketConfigs();
       if (response?.data) {
@@ -158,7 +160,7 @@ export default function User() {
     } catch (error) {
       console.error("Failed to fetch customer stats", error);
     } finally {
-      setIsLoading(false);
+      setIsTableLoading(false);
     }
   };
 
@@ -295,7 +297,7 @@ export default function User() {
                     Refresh
                   </Button>
                 </div>
-                {!isLoading ? (
+                {!isTableLoading ? (
                   <DataTable
                     columns={TicketColumns}
                     data={customerStatsAction || []}

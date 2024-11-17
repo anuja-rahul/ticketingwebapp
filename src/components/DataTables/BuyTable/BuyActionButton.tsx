@@ -5,7 +5,9 @@ interface ActionButtonProps {
   eventName: string;
 }
 
-const BuyActionButtons: React.FC<ActionButtonProps> = ({ eventName }) => {
+const BuyActionButtons: React.FC<ActionButtonProps> = ({
+  eventName,
+}) => {
   return (
     <div className="flex flex-row items-center justify-center gap-2 w-full">
       <Button
