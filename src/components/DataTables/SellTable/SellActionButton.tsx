@@ -5,6 +5,10 @@ export interface ActionButtonProps {
 }
 
 const SellActionButtons: React.FC<ActionButtonProps> = ({ eventName }) => {
+  const deleteEventConfig = async () => {};
+
+  const updateEventConfig = async () => {};
+
   return (
     <div className="flex flex-row items-center justify-center gap-2 w-full">
       <Button

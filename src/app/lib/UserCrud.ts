@@ -1,7 +1,7 @@
 import { createHttpClient } from "./httpClient";
 import { getCookieTokens } from "./BasicCrud";
 
-interface VendorStats {
+export interface VendorStats {
   id: number;
   eventName: string;
   email: string;
@@ -34,27 +34,6 @@ export async function getUser() {
   } catch (error) {
     // console.error("Error:", error);
     return null;
-  }
-}
-
-// Get all events if logged in as customer/admin
-export async function getAllVendorConfigs(): Promise<{ data?: VendorStats[] }> {
-  const tokenData = await getCookieTokens();
-  const path = "/config/all";
-
-  try {
-    const response = await createHttpClient({
-      Authorization: "Bearer " + tokenData.token.value,
-    }).get(path);
-
-    if (response.status === 200) {
-      return { data: response.data };
-    } else {
-      return {};
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    return {};
   }
 }
 

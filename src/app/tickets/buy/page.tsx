@@ -1,6 +1,6 @@
 "use client";
 
-import { getAllVendorConfigs } from "@/app/lib/UserCrud";
+import { getAllVendorConfigs } from "@/app/lib/EventConfigCruds";
 import BuyActionButtons from "@/components/DataTables/BuyTable/BuyActionButton";
 import { DataTable } from "@/components/DataTables/DataTable";
 import {
