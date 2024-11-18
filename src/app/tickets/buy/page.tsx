@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import {  SkeletonCardTable } from "@/components/UserSkeleton";
+import { SkeletonCardTable } from "@/components/UserSkeleton";
 import { useToast } from "@/hooks/use-toast";
 import { RefreshCcw } from "lucide-react";
 import { usePathname } from "next/navigation";
