@@ -13,6 +13,7 @@ export async function getAllVendorConfigs(): Promise<{ data?: VendorStats[] }> {
     }).get(path);
 
     if (response.status === 200) {
+      // console.log({ data: response.data });
       return { data: response.data };
     } else {
       return {};
@@ -27,7 +28,6 @@ export interface updateVendorConfigTotalTicketsProps {
   eventName?: string;
   totalTickets?: number;
 }
-
 
 // update VendorEventConfig totalTickets
 export async function updateVendorConfigTotalTickets({

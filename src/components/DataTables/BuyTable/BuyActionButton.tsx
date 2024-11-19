@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { addCustomerTicket } from "@/app/lib/TicketCruds";
 import { RefreshCcw } from "lucide-react";
-
 
 // test this sh*t
 interface ActionButtonProps {
@@ -11,7 +10,7 @@ interface ActionButtonProps {
 }
 
 const BuyActionButtons: React.FC<ActionButtonProps> = ({ eventName }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const { toast } = useToast();
 
   const buyAction = async () => {

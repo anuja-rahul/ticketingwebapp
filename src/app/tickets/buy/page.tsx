@@ -45,6 +45,7 @@ export default function Sell() {
           })
         );
         setTicketStatsAction(ticketStatsWithActions);
+        // console.log(ticketStatsWithActions);
       } else {
         setTicketStats(null);
         setTicketStatsAction(null);
