@@ -50,9 +50,9 @@ export default function EventTableComponent({
           (stat) => ({
             ...stat,
             action: SpecialButton ? (
-              <SpecialButton eventName={stat.eventName} />
+              <SpecialButton eventName={stat.eventName} maxTicketCapacity={stat.maxTicketCapacity} refreshMethod={getVendorStats} />
             ) : (
-              <SellActionButtons eventName={stat.eventName} />
+              <SellActionButtons eventName={stat.eventName} maxTicketCapacity={stat.maxTicketCapacity} refreshMethod={getVendorStats} />
             ),
           })
         );

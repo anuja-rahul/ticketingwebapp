@@ -23,8 +23,32 @@ export async function getAllVendorConfigs(): Promise<{ data?: VendorStats[] }> {
   }
 }
 
-export async function updateVendorConfigTotalTickets(): Promise<{
+export interface updateVendorConfigTotalTicketsProps {
+  eventName?: string;
+  totalTickets?: number;
+}
+
+
+// update VendorEventConfig totalTickets
+export async function updateVendorConfigTotalTickets({
+  eventName,
+  totalTickets,
+}: updateVendorConfigTotalTicketsProps): Promise<{
   data?: VendorStats;
 }> {
-  // return stuff
+  const tokenData = await getCookieTokens();
+  const path = "/config/event/" + eventName + "/" + totalTickets;
+  try {
+    const response = await createHttpClient({
+      Authorization: "Bearer " + tokenData.token.value,
+    }).put(path);
+    if (response.status === 200) {
+      return { data: response.data };
+    } else {
+      return {};
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return {};
+  }
 }

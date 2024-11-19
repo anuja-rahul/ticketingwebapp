@@ -126,7 +126,8 @@ export default function Sell() {
           </Card>
         </div>
       </div>
-      <EventTableComponent />
+      {/* <EventTableComponent /> */}
+      {/* Cant use EventTable anyymore make a new table */}
     </section>
   );
 }
