@@ -43,7 +43,7 @@ const SellActionButtons: React.FC<ActionButtonProps> = ({
   const [success, setSuccess] = React.useState<boolean>(false);
   const { toast } = useToast();
 
-  const deleteEventConfig = async () => {};
+  // const deleteEventConfig = async () => {};
 
   async function onSubmit(data: Schema) {
     setSuccess(false);
@@ -60,7 +60,7 @@ const SellActionButtons: React.FC<ActionButtonProps> = ({
         toast({
           variant: "default",
           title:
-            "Config saved successfully : " + new Date().toLocaleTimeString(),
+            "Config updated successfully : " + new Date().toLocaleTimeString(),
           description:
             "Table will be refreshed momentarily to showcase the latest data...",
         });
@@ -110,12 +110,12 @@ const SellActionButtons: React.FC<ActionButtonProps> = ({
           <Button variant="outline">Update</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
+          <DialogHeader className="gap-1">
             <DialogTitle>
               Update &quot;{eventName}&quot; Configuration
             </DialogTitle>
             <DialogDescription>
-              Make changes to your configuration totalTicket count here. Click
+              Make changes to your configuration{"'"}s totalTicket count here. Click
               save when you{"'"}re done.
             </DialogDescription>
           </DialogHeader>
@@ -151,9 +151,9 @@ const SellActionButtons: React.FC<ActionButtonProps> = ({
               </div>
               <div className="flex flex-row items-center justify-between w-full mt-8 px-2">
                 <DialogTrigger asChild>
-                  <Button>Close</Button>
+                  <Button className="border border-muted-foreground/30" variant={"destructive"}>Close</Button>
                 </DialogTrigger>
-                <Button className="" type="submit">
+                <Button className="border border-muted-foreground/30" type="submit">
                   {isLoading ? "updating... " : "Save Changes"}
                 </Button>
               </div>

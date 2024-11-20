@@ -41,7 +41,12 @@ export default function Sell() {
         const ticketStatsWithActions: VendorStatAction[] = response.data.map(
           (stat) => ({
             ...stat,
-            action: <BuyActionButtons eventName={stat.eventName} />,
+            action: (
+              <BuyActionButtons
+                eventName={stat.eventName}
+                refreshMethod={getTicketStats}
+              />
+            ),
           })
         );
         setTicketStatsAction(ticketStatsWithActions);
@@ -91,7 +96,7 @@ export default function Sell() {
           Buy Tickets
         </h1>
         <Separator className="my-4 bg-muted-foreground w-3/5" />
-        <p className="mb-2">Womp Womp</p>
+        <p className="mb-2">Choose and buy all the tickets you want</p>
         {isLoading ? (
           <div className="flex flex-col items-center justify-center w-4/5 mt-16">
             <SkeletonCardTable />

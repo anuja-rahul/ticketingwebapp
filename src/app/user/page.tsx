@@ -235,7 +235,7 @@ export default function User() {
                     variant="outline"
                     size="sm"
                     className="text-foreground hover:bg-primary/10 flex items-center space-x-2 duration-300 
-                    hover:translate-y-[-3px] def_btn hover:text-foreground hover:border-primary/30"
+                    hover:translate-y-[-3px] def_btn hover:text-foreground hover:border-primary/30 rounded-3xl"
                     onClick={() => {
                       fetchUser();
                       // if (user?.role === "VENDOR") {

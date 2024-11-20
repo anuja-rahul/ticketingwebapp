@@ -16,6 +16,7 @@ import {
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -30,6 +31,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import LearnMoreBtn from "../LearnMore";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -105,6 +107,9 @@ export function DataTable<TData, TValue>({
       </div>
       <div className="rounded-md border">
         <Table>
+          <TableCaption className="">
+            All the configs accessible from your <span className="text-foreground/80">security level</span> <LearnMoreBtn />
+          </TableCaption>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

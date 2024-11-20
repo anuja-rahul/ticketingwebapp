@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { addCustomerTicket } from "@/app/lib/TicketCruds";
@@ -7,33 +7,48 @@ import { RefreshCcw } from "lucide-react";
 // test this sh*t
 interface ActionButtonProps {
   eventName: string;
+  refreshMethod: () => void;
 }
 
-const BuyActionButtons: React.FC<ActionButtonProps> = ({ eventName }) => {
+const BuyActionButtons: React.FC<ActionButtonProps> = ({
+  eventName,
+  refreshMethod,
+}) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const { toast } = useToast();
+  const [success, setSuccess] = React.useState<boolean>(false);
 
   const buyAction = async () => {
+    setSuccess(false);
     setIsLoading(true);
     try {
       const response = await addCustomerTicket({ eventName });
       if (response?.data) {
         toast({
           variant: "default",
-          title: "Ticket bought successfully",
-          description: `You have bought ${response.data.ticketsBought} tickets for ${response.data.eventName}`,
+          title: "Ticket(s) bought successfully",
+          description: `You have bought ${response.data.ticketsBought} ticket(s) for the ${response.data.eventName} event`,
         });
+        setSuccess(true);
       } else {
         toast({
           variant: "destructive",
-          title: "Failed to buy ticket",
-          description: "Please try again later",
+          title: "Failed to buy ticket(s)",
+          description: "Check if there's enough tickets or Please try again later",
         });
       }
     } finally {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        refreshMethod();
+      }, 500);
+    }
+  }, [refreshMethod, success]);
 
   return (
     <div className="flex flex-row items-center justify-center gap-2 w-full">

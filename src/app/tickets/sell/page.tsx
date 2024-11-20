@@ -1,5 +1,6 @@
 "use client";
 
+import { createVendorConfigs } from "@/app/lib/EventConfigCruds";
 import EventTableComponent from "@/components/DataTables/EventTableComponent";
 import {
   Breadcrumb,
@@ -19,8 +20,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -35,13 +37,44 @@ type Schema = z.infer<typeof createSchema>;
 
 export default function Sell() {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [success, setSuccess] = React.useState<boolean>(false);
+  const { toast } = useToast();
 
   async function onSubmit(data: Schema) {
+    setSuccess(false);
     setIsLoading(true);
-    console.log(data);
-    // Create the event
-    setIsLoading(false);
+    try {
+      const response = await createVendorConfigs(data);
+      if (response?.data) {
+        setSuccess(true);
+        toast({
+          variant: "default",
+          title:
+            "Config created successfully : " + new Date().toLocaleTimeString(),
+          description:
+            "Table will be refreshed momentarily to showcase the latest data...",
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Failed creating config : " + new Date().toLocaleTimeString(),
+          description:
+            "Please make sure the [Event Name] is unique or try again later...",
+        });
+        setSuccess(false);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   }
+
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    }
+  }, [success]);
 
   const { register, handleSubmit, formState } = useForm<Schema>({
     resolver: zodResolver(createSchema),
@@ -127,6 +160,6 @@ export default function Sell() {
         </div>
       </div>
       <EventTableComponent />
-=    </section>
+    </section>
   );
 }

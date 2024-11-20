@@ -8,12 +8,13 @@ export interface TicketSchema {
 }
 
 interface CustomerTicketProp {
-    eventName: string
+  eventName: string;
 }
 
-
 // Buy tickets
-export async function addCustomerTicket({eventName}: CustomerTicketProp): Promise<{ data?: TicketSchema }> {
+export async function addCustomerTicket({
+  eventName,
+}: CustomerTicketProp): Promise<{ data?: TicketSchema }> {
   const tokenData = await getCookieTokens();
   const path = "/ticket/add/" + eventName;
 
@@ -27,8 +28,9 @@ export async function addCustomerTicket({eventName}: CustomerTicketProp): Promis
     } else {
       return {};
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.error("Error:", error);
+    // console.error("Error:", error);
     return {};
   }
 }
