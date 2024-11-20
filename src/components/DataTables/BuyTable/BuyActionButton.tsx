@@ -5,7 +5,7 @@ import { addCustomerTicket } from "@/app/lib/TicketCruds";
 import { RefreshCcw } from "lucide-react";
 
 // test this sh*t
-interface ActionButtonProps {
+export interface ActionButtonProps {
   eventName: string;
   refreshMethod: () => void;
 }

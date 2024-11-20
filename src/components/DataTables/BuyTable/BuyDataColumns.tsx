@@ -72,10 +72,11 @@ export const BuyColumns: ColumnDef<Event>[] = [
       return (
         <div className="flex justify-center">
           <Button
+          className="my-2"
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Total Tickets
+            Total Tickets <br></br> Available
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         </div>

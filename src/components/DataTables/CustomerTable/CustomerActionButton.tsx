@@ -1,16 +1,20 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import BuyActionButtons, {
+  ActionButtonProps,
+} from "../BuyTable/BuyActionButton";
 
-interface ActionButtonProps {
-  eventName: string;
-}
+// add delete methods
 
-// add buy and delete methods
-
-const CustomerActionButtons: React.FC<ActionButtonProps> = ({ eventName }) => {
+const CustomerActionButtons: React.FC<ActionButtonProps> = ({
+  eventName,
+  refreshMethod,
+}) => {
   return (
-    <div className="flex flex-row items-center justify-center gap-2 w-full">
-      <Button
+    <>
+      <div className="flex flex-row items-center justify-center w-4/5">
+      <BuyActionButtons eventName={eventName} refreshMethod={refreshMethod} />
+        {/* <Button
         className="px-5"
         variant="outline"
         onClick={() => {
@@ -18,17 +22,18 @@ const CustomerActionButtons: React.FC<ActionButtonProps> = ({ eventName }) => {
         }}
       >
         Buy
-      </Button>
-      <Button
-        variant="destructive"
-        className="scale-90 duration-300 hover:bg-red-700"
-        onClick={() => {
-          console.log("Delete button clicked", eventName);
-        }}
-      >
-        Delete
-      </Button>
-    </div>
+      </Button> */}
+        <Button
+          variant="destructive"
+          className="scale-90 duration-300 hover:bg-red-700"
+          onClick={() => {
+            console.log("Delete button clicked", eventName);
+          }}
+        >
+          Delete
+        </Button>
+      </div>
+    </>
   );
 };
 

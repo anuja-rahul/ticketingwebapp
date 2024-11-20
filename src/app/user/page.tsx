@@ -144,7 +144,7 @@ export default function User() {
         const customerStatsWithActions: CustomerTicketStatsAction[] =
           response.data.map((stat) => ({
             ...stat,
-            action: <CustomerActionButtons eventName={stat.eventName} />,
+            action: <CustomerActionButtons eventName={stat.eventName} refreshMethod={getCustomerStats} />,
           }));
         setCustomerStatsAction(customerStatsWithActions);
       } else {
@@ -280,7 +280,7 @@ export default function User() {
           ) : user?.role === "CUSTOMER" && customerStats ? (
             <div className="mt-4 w-screen px-10 flex flex-col items-center justify-start">
               <h2 className="text-3xl text-center text-balance font-bold my-2">
-                Purchase History
+                Your Tickets
               </h2>
               <Separator className="my-8 bg-muted-foreground w-2/5" />
 
