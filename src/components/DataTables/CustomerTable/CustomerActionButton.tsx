@@ -5,6 +5,8 @@ interface ActionButtonProps {
   eventName: string;
 }
 
+// add buy and delete methods
+
 const CustomerActionButtons: React.FC<ActionButtonProps> = ({ eventName }) => {
   return (
     <div className="flex flex-row items-center justify-center gap-2 w-full">
