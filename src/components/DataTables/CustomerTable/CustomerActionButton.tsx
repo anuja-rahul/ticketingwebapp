@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import BuyActionButtons, {
   ActionButtonProps,
@@ -15,6 +15,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
+import { deleteCustomerTicket } from "@/app/lib/TicketCruds";
+import { RefreshCcw } from "lucide-react";
 
 // add delete methods
 
@@ -22,17 +24,41 @@ const CustomerActionButtons: React.FC<ActionButtonProps> = ({
   eventName,
   refreshMethod,
 }) => {
-
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const { toast } = useToast();
   const [success, setSuccess] = React.useState<boolean>(false);
 
   const deleteAction = async () => {
-    
-  }
+    setSuccess(false);
+    setIsLoading(true);
+    try {
+      const response = await deleteCustomerTicket({ eventName });
+      if (response) {
+        toast({
+          variant: "default",
+          title: "Ticket(s) deleted successfully",
+          description: `You have deleted all ticket(s) under the event "${eventName}"`,
+        });
+        setSuccess(true);
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Failed to delete ticket(s)",
+          description: "Please try again later",
+        });
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-
-
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        refreshMethod();
+      }, 500);
+    }
+  }, [refreshMethod, success]);
 
   return (
     <>
@@ -79,11 +105,11 @@ const CustomerActionButtons: React.FC<ActionButtonProps> = ({
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
                 onClick={() => {
-                  // refreshMethod();
+                  deleteAction();
                 }}
                 className="bg-red-900 hover:bg-red-800/60 text-foreground duration-200"
               >
-                Delete
+                {isLoading ? <RefreshCcw className="animate-spin" /> : "Delete"}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>

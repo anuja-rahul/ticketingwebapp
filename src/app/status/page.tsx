@@ -229,7 +229,7 @@ export default function Status() {
     {
       indicator: BackEndIndicator(isBackLoading, backNormal),
       state: BackEndState(isBackLoading, backNormal),
-      service: "Backend API",
+      service: "Ticketing API",
       description:
         "Handles all the communications between the server and the database",
       run: BackEndButton(),

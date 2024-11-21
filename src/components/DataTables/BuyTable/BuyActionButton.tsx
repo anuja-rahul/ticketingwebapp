@@ -27,14 +27,15 @@ const BuyActionButtons: React.FC<ActionButtonProps> = ({
         toast({
           variant: "default",
           title: "Ticket(s) bought successfully",
-          description: `You have bought ${response.data.ticketsBought} ticket(s) for the ${response.data.eventName} event`,
+          description: `You have bought ${response.data.ticketsBought} ticket(s) for the event "${response.data.eventName}"`,
         });
         setSuccess(true);
       } else {
         toast({
           variant: "destructive",
           title: "Failed to buy ticket(s)",
-          description: "Check if there's enough tickets or Please try again later",
+          description:
+            "Check if there's enough tickets or Please try again later",
         });
       }
     } finally {
