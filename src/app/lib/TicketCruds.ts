@@ -34,3 +34,16 @@ export async function addCustomerTicket({
     return {};
   }
 }
+
+// Delete tickets
+export async function deleteCustomerTicket({
+  eventName,
+}: CustomerTicketProp): Promise<Any> {
+  const tokenData = await getCookieTokens();
+  try {
+    // do sh*t
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (error) {
+    return {};
+  }
+}
