@@ -28,14 +28,16 @@ export type Ticket = {
   customerEmail: string;
   eventName: string;
   ticketsBought: number;
+  createdAt: string;
+  updatedAt: string;
   action: React.ReactNode;
 };
 
 export const TicketColumns: ColumnDef<Ticket>[] = [
-  {
-    accessorKey: "customerEmail",
-    header: "Customer Email",
-  },
+  // {
+  //   accessorKey: "customerEmail",
+  //   header: "Customer Email",
+  // },
   {
     accessorKey: "eventName",
     header: ({ column }) => {
@@ -52,7 +54,49 @@ export const TicketColumns: ColumnDef<Ticket>[] = [
       );
     },
     cell: ({ cell }) => (
-      <div className="text-right mr-8">
+      <div className="text-left mr-1">
+        {cell.getValue() as React.ReactNode}
+      </div>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: ({ column }) => {
+      return (
+        <div className="flex justify-end">
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Created at
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      );
+    },
+    cell: ({ cell }) => (
+      <div className="text-right mr-1 text-xs">
+        {cell.getValue() as React.ReactNode}
+      </div>
+    ),
+  },
+  {
+    accessorKey: "updatedAt",
+    header: ({ column }) => {
+      return (
+        <div className="flex justify-end">
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Updated at
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      );
+    },
+    cell: ({ cell }) => (
+      <div className="text-right mr-1 text-xs">
         {cell.getValue() as React.ReactNode}
       </div>
     ),
@@ -120,7 +164,7 @@ export const TicketColumns: ColumnDef<Ticket>[] = [
 export const EventColumns: ColumnDef<Event>[] = [
   {
     accessorKey: "id",
-    header: ({column}) => {
+    header: ({ column }) => {
       return (
         <div className="flex items-start justify-start">
           <Button
@@ -230,7 +274,9 @@ export const EventColumns: ColumnDef<Event>[] = [
       );
     },
     cell: ({ cell }) => (
-      <div className="text-right mr-8">{cell.getValue() as React.ReactNode}</div>
+      <div className="text-right mr-8">
+        {cell.getValue() as React.ReactNode}
+      </div>
     ),
   },
   {

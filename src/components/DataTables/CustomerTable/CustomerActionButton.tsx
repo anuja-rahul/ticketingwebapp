@@ -62,31 +62,31 @@ const CustomerActionButtons: React.FC<ActionButtonProps> = ({
 
   return (
     <>
-      <div className="flex flex-row items-center justify-center w-4/5">
+      <div className="flex flex-row items-center justify-center w-4/5 gap-2">
         <BuyActionButtons eventName={eventName} refreshMethod={refreshMethod} />
-        {/* <Button
-        className="px-5"
-        variant="outline"
-        onClick={() => {
-          console.log("Buy button clicked", eventName);
-        }}
-      >
-        Buy
-      </Button> */}
-        {/* <Button
-          variant="destructive"
-          className="scale-90 duration-300 hover:bg-red-700"
+          {/* <Button
+          className="px-5"
+          variant="outline"
           onClick={() => {
-            console.log("Delete button clicked", eventName);
+            console.log("Buy button clicked", eventName);
           }}
-        >
-          Delete
-        </Button> */}
+          >
+          Buy
+          </Button> */}
+          {/* <Button
+            variant="destructive"
+            className="scale-90 duration-300 hover:bg-red-700"
+            onClick={() => {
+              console.log("Delete button clicked", eventName);
+            }}
+          >
+            Delete
+          </Button> */}
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button
               variant="destructive"
-              className="duration-200 hover:bg-red-800/60"
+              className="duration-200 hover:bg-red-800/60 w-1/2"
             >
               Delete
             </Button>

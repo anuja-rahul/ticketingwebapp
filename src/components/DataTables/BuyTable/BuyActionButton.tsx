@@ -52,7 +52,7 @@ const BuyActionButtons: React.FC<ActionButtonProps> = ({
   }, [refreshMethod, success]);
 
   return (
-    <div className="flex flex-row items-center justify-center gap-2 w-full">
+    <div className="flex flex-row items-center justify-center gap-2 w-1/2">
       {isLoading ? (
         <RefreshCcw className="animate-spin" />
       ) : (

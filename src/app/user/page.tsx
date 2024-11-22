@@ -25,7 +25,10 @@ import { CircleX, RefreshCcw } from "lucide-react";
 import React from "react";
 import CustomerActionButtons from "@/components/DataTables/CustomerTable/CustomerActionButton";
 import { DataTable } from "@/components/DataTables/DataTable";
-import { TicketColumns } from "@/components/DataTables/ProfileDataColumns";
+import {
+  Ticket,
+  TicketColumns,
+} from "@/components/DataTables/ProfileDataColumns";
 // import VendorActionButtons from "@/components/DataTables/VendorTable/VendorActionButton";
 import EventTableComponent from "@/components/DataTables/EventTableComponent";
 
@@ -50,19 +53,20 @@ interface UserModel {
 //   action: React.ReactNode;
 // }
 
-interface CustomerTicketStats {
+export interface CustomerTicketStats {
   customerEmail: string;
   eventName: string;
   ticketsBought: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
-interface CustomerTicketStatsAction extends CustomerTicketStats {
+interface CustomerTicketStatsAction extends Ticket {
   action: React.ReactNode;
 }
 
 export default function User() {
   const [user, setUser] = useState<UserModel | null>(null);
-  // const [vendorStats, setVendorStats] = useState<VendorStats[] | null>(null);
   const [customerStats, setCustomerStats] = useState<
     CustomerTicketStats[] | null
   >(null);
@@ -73,9 +77,6 @@ export default function User() {
   const [customerStatsAction, setCustomerStatsAction] = useState<
     CustomerTicketStatsAction[] | null
   >(null);
-  // const [vendorStatsAction, setVendorStatsAction] = useState<
-  //   VendorStatAction[] | null
-  // >(null);
 
   const pathname = usePathname();
   const { toast } = useToast();
@@ -103,38 +104,6 @@ export default function User() {
     }
   };
 
-  // const getVendorStats = async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     setMessage(true);
-  //     const response = await getVendorConfigs();
-  //     if (response?.data) {
-  //       setVendorStats(response.data);
-  //       const vendorStatsWithActions: VendorStatAction[] = response.data.map(
-  //         (stat) => ({
-  //           ...stat,
-  //           action: <VendorActionButtons eventName={stat.eventName} />,
-  //         })
-  //       );
-  //       setVendorStatsAction(vendorStatsWithActions);
-  //     } else {
-  //       setVendorStats(null);
-  //       setVendorStatsAction(null);
-  //       toast({
-  //         variant: "destructive",
-  //         title:
-  //           "Failed getting vendor stats: " + new Date().toLocaleTimeString(),
-  //         description: "Something went wrong...",
-  //       });
-  //       setMessage(false);
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to fetch vendor stats", error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
   const getCustomerStats = async () => {
     setIsTableLoading(true);
     try {
@@ -144,7 +113,12 @@ export default function User() {
         const customerStatsWithActions: CustomerTicketStatsAction[] =
           response.data.map((stat) => ({
             ...stat,
-            action: <CustomerActionButtons eventName={stat.eventName} refreshMethod={getCustomerStats} />,
+            action: (
+              <CustomerActionButtons
+                eventName={stat.eventName}
+                refreshMethod={getCustomerStats}
+              />
+            ),
           }));
         setCustomerStatsAction(customerStatsWithActions);
       } else {

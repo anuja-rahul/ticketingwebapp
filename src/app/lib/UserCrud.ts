@@ -1,5 +1,6 @@
 import { createHttpClient } from "./httpClient";
 import { getCookieTokens } from "./BasicCrud";
+import { CustomerTicketStats } from "../user/page";
 
 export interface VendorStats {
   id: number;
@@ -11,11 +12,11 @@ export interface VendorStats {
   maxTicketCapacity: number;
 }
 
-interface CustomerTicketStats {
-  customerEmail: string;
-  eventName: string;
-  ticketsBought: number;
-}
+// interface CustomerTicketStats {
+//   customerEmail: string;
+//   eventName: string;
+//   ticketsBought: number;
+// }
 
 export async function getUser() {
   const tokenData = await getCookieTokens();
