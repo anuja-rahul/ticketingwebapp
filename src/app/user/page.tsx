@@ -37,21 +37,8 @@ interface UserModel {
   name: string;
   email: string;
   role: string;
+  createdAt: string
 }
-
-// interface VendorStats {
-//   id: number;
-//   eventName: string;
-//   email: string;
-//   totalTickets: number;
-//   ticketReleaseRate: number;
-//   customerRetrievalRate: number;
-//   maxTicketCapacity: number;
-// }
-
-// interface VendorStatAction extends VendorStats {
-//   action: React.ReactNode;
-// }
 
 export interface CustomerTicketStats {
   customerEmail: string;
