@@ -47,25 +47,25 @@ export const BuyColumns: ColumnDef<Event>[] = [
       <div className="text-center">{cell.getValue() as React.ReactNode}</div>
     ),
   },
-  //   {
-  //     accessorKey: "email",
-  //     header: ({ column }) => {
-  //       return (
-  //         <div className="flex justify-center">
-  //           <Button
-  //             variant="ghost"
-  //             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-  //           >
-  //             Vendor Email
-  //             <ArrowUpDown className="ml-2 h-4 w-4" />
-  //           </Button>
-  //         </div>
-  //       );
-  //     },
-  //     cell: ({ cell }) => (
-  //       <div className="text-left">{cell.getValue() as React.ReactNode}</div>
-  //     ),
-  //   },
+    {
+      accessorKey: "email",
+      header: ({ column }) => {
+        return (
+          <div className="flex justify-center">
+            <Button
+              variant="ghost"
+              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            >
+              Vendor Email
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        );
+      },
+      cell: ({ cell }) => (
+        <div className="text-center">{cell.getValue() as React.ReactNode}</div>
+      ),
+    },
   {
     accessorKey: "totalTickets",
     header: ({ column }) => {
