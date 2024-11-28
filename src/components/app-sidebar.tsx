@@ -28,7 +28,6 @@ const themes = [
   {
     name: "TicketingApp",
     logo: Ticket,
-    plan: "frontend",
   },
 ];
 
@@ -146,15 +145,20 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
+    <Sidebar
+      collapsible="icon"
+      {...props}
+      side="left"
+      className="bg-transparent"
+    >
+      <SidebarHeader className="bg-gradient-to-l from-background to-secondary">
         <ThemeSwitcher themes={themes} />
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="bg-gradient-to-l from-background to-secondary">
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="bg-gradient-to-l from-background to-secondary">
         <NavUser user={data.user} />
       </SidebarFooter>
       <SidebarRail />

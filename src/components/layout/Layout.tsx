@@ -29,7 +29,7 @@ export default function Layout({ children }: LayoutProps) {
   const pathSegments = path.split("/").filter((segment) => segment);
 
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <AppSidebar />
       <SidebarInset>
         <header className="fixed flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
@@ -61,7 +61,7 @@ export default function Layout({ children }: LayoutProps) {
             </Breadcrumb>
           </div>
         </header>
-        <section className="w-full flex flex-col items-center justify-center">
+        <section className="w-full flex flex-col items-center justify-center bg-gradient-to-b from-background to-secondary">
           {children}
           <Footer />
         </section>

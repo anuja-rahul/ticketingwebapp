@@ -23,13 +23,20 @@ export function ThemeSwitcher({
   themes: {
     name: string;
     logo: React.ElementType;
-    plan: string;
   }[];
 }) {
   const { isMobile } = useSidebar();
   const [activeTeam] = React.useState(themes[0]);
-
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; // Or a loading indicator if desired
+  }
 
   return (
     <SidebarMenu>
@@ -40,14 +47,14 @@ export function ThemeSwitcher({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <activeTeam.logo className="size-4" />
+              <div className="flex aspect-square flex-col size-8 items-center justify-center rounded-lg bg-transparent p-2">
+                <activeTeam.logo className="size-4 w-auto h-auto" />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">
                   {activeTeam.name}
                 </span>
-                <span className="truncate text-xs">{theme}</span>
+                <span className="truncate text-xs capitalize">{theme}</span>
               </div>
 
               <div className="hover:bg-transparent flex items-center justify-center scale-90">
