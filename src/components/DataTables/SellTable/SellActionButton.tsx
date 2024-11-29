@@ -107,7 +107,7 @@ const SellActionButtons: React.FC<ActionButtonProps> = ({
       </Button> */}
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="outline">Update</Button>
+          <Button variant="outline">Add</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader className="gap-1">
@@ -125,8 +125,8 @@ const SellActionButtons: React.FC<ActionButtonProps> = ({
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-row items-center gap-4">
                 <Label htmlFor="totalTickets" className="text-right">
-                  <span className="flex flex-col text-balance">
-                    TotalTickets
+                  <span className="flex flex-col text-nowrap">
+                    Add Tickets
                   </span>
                 </Label>
                 <Input

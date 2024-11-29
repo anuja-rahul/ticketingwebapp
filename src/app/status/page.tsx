@@ -12,14 +12,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import React, { useEffect } from "react";
@@ -238,19 +230,6 @@ export default function Status() {
 
   return (
     <section className="flex flex-col justify-start items-center w-full my-12 h-screen pt-10 z-[1] base_level">
-      <div className="flex flex-col items-start justify-start w-full">
-        <Breadcrumb className="pl-8">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/">Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/status">status</BreadcrumbLink>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </div>
       <div className="flex flex-col justify-center items-center mt-12 w-4/5">
         <div className="space-y-1 flex flex-col justify-center items-center text-sm text-muted-foreground w-auto">
           <h2 className="text-4xl font-medium text-foreground leading-none mb-4">

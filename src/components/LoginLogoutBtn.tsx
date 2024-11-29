@@ -9,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
-import { LockIcon, LogOut } from "lucide-react";
+import { LogIn, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import clsx from "clsx";
@@ -70,7 +70,7 @@ export default function LoginLogoutBtn({
 
   return (
     <>
-      <div className={clsx("border rounded-2xl", className)}>
+      <div className={clsx("", className)}>
         <TooltipProvider delayDuration={0}>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -79,22 +79,23 @@ export default function LoginLogoutBtn({
                   type="button"
                   onClick={handleLogout}
                   className={clsx(
-                    "flex items-center justify-center scale-100 duration-300 hover:translate-y-[-2px] hover:bg-muted-foreground/20 rounded-2xl p-1 px-2 text-xs flex-row gap-2",
+                    "flex items-center justify-center scale-100 duration-300 hover:translate-y-[-2px]  flex-row gap-2",
                     className
                   )}
                 >
+                  <LogOut />
                   Logout
-                  <LogOut className="scale-75" />
                 </button>
               ) : (
                 <Link href="/auth">
                   <div
                     className={clsx(
-                      "flex items-center justify-center scale-100 duration-300 hover:translate-y-[-2px] hover:bg-muted-foreground/20 rounded-2xl p-2",
+                      "flex items-center justify-center scale-100 duration-200 gap-2",
                       className
                     )}
                   >
-                    <LockIcon />
+                    <LogIn />
+                    Login
                   </div>
                 </Link>
               )}

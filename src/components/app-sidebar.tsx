@@ -3,17 +3,20 @@
 import * as React from "react";
 import {
   BookOpen,
-  Bot,
-  Frame,
+  FileText,
+  Gauge,
+  Lock,
   Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
+  Server,
+  ShieldCheck,
+  ShoppingCart,
+  Store,
   Ticket,
+  UserCheck,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
-import { NavProjects } from "@/components/nav-projects";
+import { NavSupport } from "@/components/nav-support";
 import { NavUser } from "@/components/nav-user";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import {
@@ -32,112 +35,104 @@ const themes = [
 ];
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
+      title: "Authentication",
+      url: "/auth",
+      icon: Lock,
+      isActive: false,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Signup",
+          url: "/auth/signup",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Login",
+          url: "/auth/login",
         },
         {
-          title: "Settings",
-          url: "#",
+          title: "Signout",
+          url: "/auth/signout",
         },
       ],
     },
     {
-      title: "Models",
+      title: "Admins",
       url: "#",
-      icon: Bot,
+      icon: ShieldCheck,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "All Users",
+          url: "/users",
         },
         {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
+          title: "Realtime Dashboard",
+          url: "/dashboard",
         },
       ],
     },
     {
-      title: "Documentation",
+      title: "Vendors",
       url: "#",
-      icon: BookOpen,
+      icon: Store,
       items: [
         {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
+          title: "Sell Tickets",
+          url: "/tickets/sell",
         },
       ],
     },
     {
-      title: "Settings",
+      title: "Customers",
       url: "#",
-      icon: Settings2,
+      icon: ShoppingCart,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: "Buy Tickets",
+          url: "/tickets/buy",
+        },
+      ],
+    },
+    {
+      title: "Anyone",
+      url: "#",
+      icon: UserCheck,
+      items: [
+        {
+          title: "Profile",
+          url: "/user",
         },
         {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
+          title: "System Status",
+          url: "/status",
         },
       ],
     },
   ],
-  projects: [
+  support: [
     {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
+      name: "System Status",
+      url: "/status",
+      icon: Gauge,
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
+      name: "API Documentation",
+      url: "http://localhost:8080/swagger-ui/index.html",
+      icon: Server,
     },
     {
-      name: "Travel",
-      url: "#",
+      name: "Learn More",
+      url: "/learn-more",
+      icon: BookOpen,
+    },
+    {
+      name: "Terms & Services",
+      url: "/terms",
+      icon: FileText,
+    },
+    {
+      name: "Sitemap",
+      url: "/sitemap",
       icon: Map,
     },
   ],
@@ -151,15 +146,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       side="left"
       className="bg-transparent"
     >
-      <SidebarHeader className="bg-gradient-to-l from-background to-secondary">
+      <SidebarHeader className="bg-gradient-to-l from-background via-secondary/80 to-background">
         <ThemeSwitcher themes={themes} />
       </SidebarHeader>
-      <SidebarContent className="bg-gradient-to-l from-background to-secondary">
+      <SidebarContent className="bg-gradient-to-l from-background via-secondary/80 to-background">
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <NavSupport support={data.support} />
       </SidebarContent>
-      <SidebarFooter className="bg-gradient-to-l from-background to-secondary">
-        <NavUser user={data.user} />
+      <SidebarFooter className="bg-gradient-to-l from-background via-secondary/80 to-background">
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

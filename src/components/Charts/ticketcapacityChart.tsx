@@ -110,7 +110,7 @@ export default function TicketCapacityChart() {
         </CardContent>
         <CardFooter className="flex-col items-start gap-2 text-sm">
           <div className="leading-none text-muted-foreground">
-            Showing total system capacity
+            Showing total system capacity (tickets).
           </div>
         </CardFooter>
       </Card>

@@ -1,13 +1,6 @@
 "use client";
 
 import "./index.scss";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { useEffect, useState } from "react";
 import {
   getCustomerTicketConfigs,
@@ -37,7 +30,7 @@ interface UserModel {
   name: string;
   email: string;
   role: string;
-  createdAt: string
+  createdAt: string;
 }
 
 export interface CustomerTicketStats {
@@ -144,19 +137,6 @@ export default function User() {
 
   return (
     <section className="pt-10 flex flex-col justify-start items-center w-full h-auto">
-      <div className="flex flex-col items-start justify-start w-full h-auto">
-        <Breadcrumb className="ml-8">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/">Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/user">User</BreadcrumbLink>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </div>
       <div className="flex flex-col items-center justify-center h-auto">
         <h1 className="text-foreground text-4xl my-4 text-balance text-center font-bold">
           User Profile
@@ -169,7 +149,7 @@ export default function User() {
             <Card className="w-full min-w-[400px] max-w-md overflow-hidden border rounded-3xl">
               <div
                 className="bg-gradient-to-br from-primary/30 to-muted/30 px-6 py-6 z-1
-               flex flex-col items-center justify-center w-full h-auto gap-4 rounded-3xl"
+                flex flex-col items-center justify-center w-full h-auto gap-4 rounded-3xl"
               >
                 <CardContent className="p-0">
                   <div className="grid grid-cols-[auto,1fr] gap-x-4 gap-y-4 gap-4">

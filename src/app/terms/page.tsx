@@ -6,30 +6,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 
 export default function Terms() {
   return (
     <section className="pt-10 flex flex-col justify-start items-center w-full min-h-svh">
-      <div className="flex flex-col items-start justify-start w-full">
-        <Breadcrumb className="ml-8">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/">Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/terms">Terms & Conditions</BreadcrumbLink>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </div>
       <div className="flex flex-col justify-center items-center mt-12 w-4/5">
         <div className="space-y-1 flex flex-col justify-center items-center text-sm text-muted-foreground w-auto">
           <h2 className="text-4xl font-medium text-foreground leading-none mb-4">
