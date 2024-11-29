@@ -54,7 +54,7 @@ export function NavMain({
             className="group/collapsible"
           >
             <SidebarMenuItem>
-              <CollapsibleTrigger asChild>
+              <CollapsibleTrigger asChild className="hover:translate-y-[-2px]">
                 <SidebarMenuButton tooltip={item.title}>
                   {item.icon && <item.icon />}
                   <span>{item.title}</span>
@@ -65,7 +65,10 @@ export function NavMain({
                 <SidebarMenuSub>
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
+                      <SidebarMenuSubButton
+                        asChild
+                        className="hover:bg-gradient-to-l from-secondary to-background border-2 hover:border-primary/50 duration-300 hover:translate-y-[-2px]"
+                      >
                         <a href={subItem.url}>
                           <span>{subItem.title}</span>
                         </a>

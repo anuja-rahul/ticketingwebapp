@@ -23,7 +23,7 @@ import { useUserIcon } from "./Avatar";
 
 export function NavUser() {
   const { isMobile } = useSidebar();
-  const { role, user: email } = useUserIcon();
+  const { role, email } = useUserIcon();
 
   const user = {
     role,
@@ -77,8 +77,8 @@ export function NavUser() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <BadgeCheck />
-                <Link href="/user">Account</Link>
+                <BadgeCheck/>
+                <Link href="/user" className="duration-300 hover:translate-y-[-2px]">Account</Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

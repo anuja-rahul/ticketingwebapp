@@ -52,7 +52,7 @@ export function NavSupport({
       <SidebarGroupLabel>Support</SidebarGroupLabel>
       <SidebarMenu>
         {support.map((item) => (
-          <SidebarMenuItem key={item.name}>
+          <SidebarMenuItem key={item.name} className="hover:translate-y-[-2px] duration-200">
             <SidebarMenuButton asChild>
               <a href={item.url}>
                 <item.icon />

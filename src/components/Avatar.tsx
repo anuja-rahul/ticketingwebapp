@@ -18,7 +18,7 @@ const tempCookies: Cookies = {
 
 interface UserIconReturn {
   role: string;
-  user: string;
+  email: string;
 }
 
 export function useUserIcon(): UserIconReturn {
@@ -41,6 +41,6 @@ export function useUserIcon(): UserIconReturn {
 
   return {
     role: cookies?.role?.value?.toLowerCase() ?? "none",
-    user: cookies?.username?.value ?? "none",
+    email: cookies?.username?.value ?? "none",
   };
 }

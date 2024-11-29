@@ -122,7 +122,7 @@ const data = {
     },
     {
       name: "Learn More",
-      url: "/learn-more",
+      url: "/docs",
       icon: BookOpen,
     },
     {

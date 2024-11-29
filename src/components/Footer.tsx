@@ -15,8 +15,8 @@ export default function Footer() {
   return (
     // bg-blue-900/30
     <footer
-      className="w-4/5 bottom-0 flex flex-row align-middle justify-between min-h-10 h-28 items-center px-20 rounded-full 
-      gap-2 p-12 bg-gradient-to-r from-background/60 via-muted-foreground/20 to-background/60 border-background/50 border"
+      className="w-4/5 bottom-0 flex flex-row align-middle justify-between min-h-10 h-28 items-center px-20 rounded-full
+      gap-2 p-12 bg-gradient-to-r from-background/60 via-muted-foreground/20 to-background/60 border-background/50 border mt-6"
     >
       <div className="flex flex-row items-center justify-center w-2/12 p-4 flex-wrap">
         <Link
@@ -70,7 +70,7 @@ export default function Footer() {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/help"
+                href="/docs"
                 className="duration-300 hover:translate-y-[-3px] hover:bg-muted-foreground/30 rounded-full p-2"
               >
                 <CircleHelp />
