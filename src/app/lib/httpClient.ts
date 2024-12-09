@@ -1,6 +1,4 @@
-import Axios from 'axios'
-// import { NEXT_PUBLIC_API_URL } from '../../lib/env';
-
+import axios from 'axios';
 
 const defaultHeaders = {
   'X-Requested-With': 'XMLHttpRequest',
@@ -9,8 +7,7 @@ const defaultHeaders = {
 };
 
 export const createHttpClient = (additionalHeaders = {}) => {
-  
-  return Axios.create({
+  return axios.create({
     baseURL: "http://localhost:8080/api",
     headers: {
       ...defaultHeaders,
@@ -18,7 +15,20 @@ export const createHttpClient = (additionalHeaders = {}) => {
     },
     withCredentials: true,
     xsrfCookieName: 'XSRF-TOKEN',
-    withXSRFToken: true,
+    xsrfHeaderName: 'X-XSRF-TOKEN',
   });
 };
 
+// export async function TestAPI() {
+//   try {
+//     const response = await createHttpClient().get("/test");
+//     if (response.status === 200) {
+//       return response;
+//     } else {
+//       return null;
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     return null;
+//   }
+// }

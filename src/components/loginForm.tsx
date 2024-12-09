@@ -114,6 +114,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             description: "Password must not contain any empty spaces",
           });
         } else {
+          console.log("Error:", error.status);
           toast({
             variant: "destructive",
             title:
