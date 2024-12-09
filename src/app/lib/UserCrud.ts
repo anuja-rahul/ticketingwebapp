@@ -38,6 +38,26 @@ export async function getUser() {
   }
 }
 
+export async function getAllUsers() {
+  const tokenData = await getCookieTokens();
+  const path = "/user/all";
+
+  try {
+    const response = await createHttpClient({
+      Authorization: "Bearer " + tokenData.token.value,
+    }).get(path);
+    if (response.status == 200) {
+      return response;
+    } else {
+      return null;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (error) {
+    // console.error("Error:", error);
+    return null;
+  }
+}
+
 // Get events under vendor email
 export async function getVendorConfigs(): Promise<{ data?: VendorStats[] }> {
   const tokenData = await getCookieTokens();
