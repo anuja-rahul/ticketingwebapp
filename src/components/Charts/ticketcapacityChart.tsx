@@ -18,6 +18,9 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { getTicketPoolStats } from "@/app/lib/Records";
 import { useState, useEffect } from "react";
+import { RefreshCcw } from "lucide-react";
+import { Button } from "../ui/button";
+import clsx from "clsx";
 
 interface ChartDataProps {
   yAxis: string;
@@ -67,14 +70,28 @@ export default function TicketCapacityChart() {
 
   useEffect(() => {
     getPoolStats();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
       <Card className="full sm:w-[350px] lg:w-[500px]">
-        <CardHeader>
-          <CardTitle>System Capacity</CardTitle>
+        <CardHeader className="flex flex-col items-start justify-center w-full">
+          <CardTitle className="flex flex-row items-center justify-between w-full">
+            <span className="">System Capacity</span>
+            <Button
+              variant="outline"
+              size="sm"
+              className="text-foreground hover:bg-primary/10 items-center space-x-2 duration-300
+                    hover:translate-y-[-3px] def_btn hover:text-foreground hover:border-primary/30 rounded-3xl flex justify-end"
+              onClick={() => {
+                getPoolStats();
+              }}
+            >
+              <RefreshCcw className={clsx("h-4 w-4", {"animate-spin": isLoading})} />
+              <span>Refresh</span>
+            </Button>
+          </CardTitle>
           <CardDescription>realtime</CardDescription>
         </CardHeader>
         <CardContent>

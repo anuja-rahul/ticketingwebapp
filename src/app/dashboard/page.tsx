@@ -1,9 +1,10 @@
+import ThreadCapacityGraph from "@/components/Charts/threadCapacityGraph";
 import TicketCapacityChart from "@/components/Charts/ticketcapacityChart";
 
 export default function Dashboard() {
   return (
     <section className="pt-10 flex flex-col justify-start items-center w-full h-auto">
-      <div className="flex flex-col items-center justify-center h-auto">
+      <div className="flex flex-col items-center justify-center h-auto gap-2">
         <h1 className="text-foreground text-4xl my-4 text-balance text-center font-bold">
           Dashboard
         </h1>
@@ -12,6 +13,7 @@ export default function Dashboard() {
           one place
         </p>
         <TicketCapacityChart />
+        <ThreadCapacityGraph />
       </div>
     </section>
   );

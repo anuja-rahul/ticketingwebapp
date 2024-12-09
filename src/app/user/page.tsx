@@ -30,7 +30,7 @@ interface UserModel {
   name: string;
   email: string;
   role: string;
-  createdAt: string;
+  createdAt: number[];
 }
 
 export interface CustomerTicketStats {
@@ -175,7 +175,7 @@ export default function User() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-foreground hover:bg-primary/10 flex items-center space-x-2 duration-300 
+                    className="text-foreground hover:bg-primary/10 flex items-center space-x-2 duration-300
                     hover:translate-y-[-3px] def_btn hover:text-foreground hover:border-primary/30 rounded-3xl"
                     onClick={() => {
                       fetchUser();
