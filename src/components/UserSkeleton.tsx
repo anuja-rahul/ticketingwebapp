@@ -8,11 +8,19 @@ export function SkeletonCard() {
   );
 }
 
+export function LongSkeletonCard() {
+  return (
+    <div className="flex flex-col space-y-3">
+      <Skeleton className="h-[235px] w-[1280px] rounded-3xl mb-4" />
+    </div>
+  );
+}
+
 interface FilledProps {
   Filler: React.ReactNode;
 }
 
-export function FilledSkeleton({Filler }: FilledProps) {
+export function FilledSkeleton({ Filler }: FilledProps) {
   return <Skeleton>{Filler}</Skeleton>;
 }
 

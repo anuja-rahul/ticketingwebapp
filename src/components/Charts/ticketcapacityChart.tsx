@@ -34,7 +34,7 @@ const initialChartData: ChartDataProps[] = [
 
 const chartConfig = {
   load: {
-    label: "amount",
+    label: "count :",
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
@@ -126,7 +126,7 @@ export default function TicketCapacityChart() {
           )}
         </CardContent>
         <CardFooter className="flex-col items-start gap-2 text-sm">
-          <div className="leading-none text-muted-foreground">
+          <div className="leading-none text-muted-foreground flex flex-row text-balance py-1 gap-2">
             Showing total system capacity (tickets).
           </div>
         </CardFooter>

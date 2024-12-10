@@ -17,13 +17,17 @@ export interface TransformedTicketThreadPoolStats {
   totalThreads: number;
 }
 
+interface getThreadPoolStatsProps {
+  threadType: string;
+}
+
 
 // Get ticketThreadpool status if logged in as an admin
-export async function getTicketThreadPoolStats(): Promise<{
+export async function getThreadPoolStats({threadType}: getThreadPoolStatsProps): Promise<{
   data?: ticketThrealPoolStats[];
 }> {
   const tokenData = await getCookieTokens();
-  const path = "/thread/sort/ticketExecutor";
+  const path = "/thread/sort/" + threadType;
 
   try {
     const response = await createHttpClient({

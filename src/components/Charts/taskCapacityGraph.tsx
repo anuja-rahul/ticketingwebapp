@@ -21,33 +21,12 @@ import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
 import {
   getThreadPoolStats,
-  ticketThrealPoolStats,
   TransformedTicketThreadPoolStats,
 } from "@/app/lib/ThreadPool";
 import { SkeletonCard } from "../UserSkeleton";
 import { Button } from "../ui/button";
 import clsx from "clsx";
-
-export function parseDate(dateArray: number[]): Date {
-  const [year, month, day, hour, minute, second, nano] = dateArray;
-  const date = new Date(
-    Date.UTC(year, month - 1, day, hour, minute, second, nano / 1000000)
-  );
-  date.setHours(date.getHours() - 5);
-  date.setMinutes(date.getMinutes() - 30);
-  return date;
-}
-
-
-export function transformUserData(
-  apiResponse: ticketThrealPoolStats[]
-): TransformedTicketThreadPoolStats[] {
-  return apiResponse.map((data) => ({
-    ...data,
-    createdAt: parseDate(data.createdAt).toISOString(),
-  }));
-}
-
+import { parseDate, transformUserData } from "./threadCapacityGraph";
 
 const chartData: TransformedTicketThreadPoolStats[] = [
   {
@@ -88,7 +67,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function ThreadCapacityGraph() {
+export default function TaskCapacityGraph() {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [graphData, setGraphData] =
@@ -97,7 +76,9 @@ export default function ThreadCapacityGraph() {
   const getThreadStats = async () => {
     setIsLoading(true);
     try {
-      const response = await getThreadPoolStats({ threadType: "ticketExecutor" });
+      const response = await getThreadPoolStats({
+        threadType: "taskExecutor",
+      });
       if (response.data) {
         const formattedData = transformUserData(response.data);
         setGraphData(formattedData);
@@ -123,7 +104,7 @@ export default function ThreadCapacityGraph() {
     <Card className="mt-6 w-1/2">
       <CardHeader className="flex flex-row w-full items-center justify-between">
         <div className="flex flex-col w-3/5">
-          <CardTitle>ThreadPool - TicketExecutor</CardTitle>
+          <CardTitle>ThreadPool - TaskExecutor</CardTitle>
           <CardDescription>
             Showing upto 60 of the latest thread pool records
           </CardDescription>
