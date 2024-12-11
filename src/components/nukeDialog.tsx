@@ -21,14 +21,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
-import { getNukeData, getRole, NukeStats } from "@/app/lib/nuke";
+import { getNukeData, getRole } from "@/app/lib/nuke";
 
 export default function NukeDialog() {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
   const [auth, setAuth] = useState(false);
-
-  const [nukeData, setNukeData] = useState<NukeStats | null>(null);
 
   const getAuth = async () => {
     setIsLoading(true);
@@ -46,11 +44,10 @@ export default function NukeDialog() {
       if (auth) {
         const response = await getNukeData();
         if (response.data) {
-          setNukeData(response.data);
           toast({
             variant: "default",
             title: "Successfully Nuked the server",
-            description: "Thank you for using TicketingApp " + nukeData,
+            description: "Thank you for using TicketingApp ",
           });
         } else {
           toast({
