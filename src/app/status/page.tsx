@@ -18,6 +18,7 @@ import React, { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { TestAPI, TestServerRoutes } from "../lib/TestAPI";
 import Indicator from "@/components/Indicator";
+import NukeDialog from "@/components/nukeDialog";
 
 export default function Status() {
   const [isBackLoading, setIsBackLoading] = React.useState<boolean>(true);
@@ -288,6 +289,7 @@ export default function Status() {
             </TableRow>
           </TableFooter>
         </Table>
+        <NukeDialog />
       </div>
     </section>
   );
