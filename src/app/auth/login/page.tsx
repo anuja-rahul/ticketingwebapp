@@ -1,5 +1,9 @@
 import { LoginForm } from "@/components/loginForm";
 
+export const metadata = {
+  title: "TicketingApp - Login",
+};
+
 export default function Login() {
   return (
     <section className="pt-10 flex flex-col justify-center items-center w-full">

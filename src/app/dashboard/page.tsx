@@ -4,6 +4,10 @@ import ThreadCapacityGraph from "@/components/Charts/threadCapacityGraph";
 import TicketCapacityChart from "@/components/Charts/ticketcapacityChart";
 import TopSalesChart from "@/components/Charts/TopSalesChart";
 
+export const metadata = {
+  title: "TicketingApp - Dashboard",
+};
+
 export default function Dashboard() {
   return (
     <section className="pt-10 flex flex-col justify-start items-center w-full h-auto">

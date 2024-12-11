@@ -1,6 +1,9 @@
-"use client";
 
 import { RegisterForm } from "@/components/registerForm";
+
+export const metadata = {
+  title: "TicketingApp - Signup",
+};
 
 export default function Signup() {
   return (
