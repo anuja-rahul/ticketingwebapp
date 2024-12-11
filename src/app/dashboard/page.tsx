@@ -2,6 +2,7 @@ import PlatformHistoryGraph from "@/components/Charts/PlatformHistoryGraph";
 import TaskCapacityGraph from "@/components/Charts/taskCapacityGraph";
 import ThreadCapacityGraph from "@/components/Charts/threadCapacityGraph";
 import TicketCapacityChart from "@/components/Charts/ticketcapacityChart";
+import TopSalesChart from "@/components/Charts/TopSalesChart";
 
 export default function Dashboard() {
   return (
@@ -19,7 +20,10 @@ export default function Dashboard() {
           <ThreadCapacityGraph />
           <TaskCapacityGraph />
         </div>
-        <TicketCapacityChart />
+        <div className="flex flex-row w-full gap-4">
+          <TopSalesChart />
+          <TicketCapacityChart />
+        </div>
       </div>
     </section>
   );

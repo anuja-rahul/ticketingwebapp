@@ -21,6 +21,7 @@ import { useState, useEffect } from "react";
 import { RefreshCcw } from "lucide-react";
 import { Button } from "../ui/button";
 import clsx from "clsx";
+import { SkeletonCard } from "../UserSkeleton";
 
 interface ChartDataProps {
   yAxis: string;
@@ -75,7 +76,7 @@ export default function TicketCapacityChart() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
-      <Card className="full sm:w-[350px] lg:w-[500px]">
+      <Card className="full sm:w-[350px] lg:w-full">
         <CardHeader className="flex flex-col items-start justify-center w-full">
           <CardTitle className="flex flex-row items-center justify-between w-full">
             <span className="">System Capacity</span>
@@ -96,7 +97,8 @@ export default function TicketCapacityChart() {
         </CardHeader>
         <CardContent>
           {isLoading ? (
-            <div>Loading...</div>
+            // <div>Loading...</div>
+            <SkeletonCard />
           ) : (
             <ChartContainer config={chartConfig}>
               <BarChart
