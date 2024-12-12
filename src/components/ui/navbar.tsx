@@ -174,7 +174,7 @@ function TitleWithBadge({ title, role }: TitleWithBadgeProps) {
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
+  React.ComponentPropsWithoutRef<"a"> & {title: React.ReactNode}
 >(({ className, title, children, ...props }, ref) => {
   return (
     <li>
