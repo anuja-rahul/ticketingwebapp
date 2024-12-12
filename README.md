@@ -138,3 +138,5 @@ We welcome contributions from the community! To contribute, follow these steps:
 ## License
 
 This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for more details.
+
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=anuja-rahul&repo=ticketingwebapp&theme=nightowl)](https://github.com/anuja-rahul/ticketingwebapp/)
