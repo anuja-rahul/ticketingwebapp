@@ -28,6 +28,11 @@
 
 ```
 
+TicketingApp frontend is crafted with Next.jsto provide a seamless and interactive user experience.
+It dynamically handles ticket sales, purchases, and event management in real-time.
+With a responsive design, it ensures accessibility across devices, offering intuitive navigation and user-friendly interfaces.
+The integration with the backend enables a cohesive and efficient system, allowing users to effortlessly browse, buy, and manage tickets and events.
+
 ## 🎫 Real-Time Event Ticketing System Web UI TodoList
 
 - [x] **Authentication**: Secure authentication for everyone.
