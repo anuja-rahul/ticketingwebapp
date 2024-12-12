@@ -28,15 +28,6 @@ import {
 
 type Role = "vendor" | "customer" | "admin" | "any";
 
-// interface TitleAccessProps {
-//   title: string;
-//   role: Role;
-// }
-
-// function TitleAccess({ title, role }: TitleAccessProps) {
-//   return `${title}`;
-// }
-
 const components: {
   title: string;
   role: Role;
