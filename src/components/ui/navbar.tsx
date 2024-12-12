@@ -174,7 +174,7 @@ function TitleWithBadge({ title, role }: TitleWithBadgeProps) {
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & {title: React.ReactNode}
+  React.ComponentPropsWithoutRef<"a"> & { title: React.ReactNode }
 >(({ className, title, children, ...props }, ref) => {
   return (
     <li>
@@ -187,7 +187,12 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
+          {/* <div className="text-sm font-medium leading-none">{title}</div> */}
+          {typeof title === "string" ? (
+            <div className="text-sm font-medium leading-none">{title}</div>
+          ) : (
+            title
+          )}
           <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
             {children}
           </p>
