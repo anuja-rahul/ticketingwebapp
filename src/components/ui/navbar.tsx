@@ -124,7 +124,8 @@ export function Navbar() {
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (
                 <ListItem
-                  key={component.href}
+                key={component.href}
+                /* eslint-disable @typescript-eslint/no-unsafe-assignment */
                   title={
                     <TitleWithBadge
                       title={component.title}
@@ -187,12 +188,7 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          {/* <div className="text-sm font-medium leading-none">{title}</div> */}
-          {typeof title === "string" ? (
-            <div className="text-sm font-medium leading-none">{title}</div>
-          ) : (
-            title
-          )}
+          <div className="text-sm font-medium leading-none">{title}</div>
           <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
             {children}
           </p>
