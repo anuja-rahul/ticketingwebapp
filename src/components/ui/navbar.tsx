@@ -28,62 +28,58 @@ import {
 
 type Role = "vendor" | "customer" | "admin" | "any";
 
-interface TitleAccessProps {
-  title: string;
-  role: Role;
-}
+// interface TitleAccessProps {
+//   title: string;
+//   role: Role;
+// }
 
-function TitleAccess({ title, role }: TitleAccessProps) {
-  return (
-    <div>
-      <span className="">{title}</span>
-      {role === "vendor" && <VendorBadge />}
-      {role === "customer" && <CustomerBadge />}
-      {role === "admin" && <AdminBadge />}
-      {role === "any" && <AnyBadge />}
-    </div>
-  );
-}
+// function TitleAccess({ title, role }: TitleAccessProps) {
+//   return `${title}`;
+// }
 
 const components: {
-  title:
-    | React.ReactElement<unknown, string | React.JSXElementConstructor<unknown>>
-    | string
-    | undefined;
+  title: string;
+  role: Role;
   href: string;
   description: string;
 }[] = [
   {
-    title: TitleAccess({ title: "Buy Tickets", role: "customer" }),
+    title: "Buy Tickets",
+    role: "customer",
     href: "/tickets/buy",
     description:
       "Select and purchase tickets from a wide range of dynamically updated collection of events.",
   },
   {
-    title: TitleAccess({ title: "Sell Tickets", role: "vendor" }),
+    title: "Sell Tickets",
+    role: "vendor",
     href: "/tickets/sell",
     description:
-      "Looking for a place to sell your tickets ? TicketingApp is the right place for you.",
+      "Looking for a place to sell your tickets? TicketingApp is the right place for you.",
   },
   {
-    title: TitleAccess({ title: "Dashboard", role: "admin" }),
+    title: "Dashboard",
+    role: "admin",
     href: "/dashboard",
-    description: "get the latest statistics about our platform.",
+    description: "Get the latest statistics about our platform.",
   },
   {
-    title: TitleAccess({ title: "Profile", role: "any" }),
+    title: "Profile",
+    role: "any",
     href: "/user",
-    description: "want to checkout your profile ?",
+    description: "Want to checkout your profile?",
   },
   {
-    title: TitleAccess({ title: "All Users", role: "admin" }),
+    title: "All Users",
+    role: "admin",
     href: "/users",
-    description: "View a summerized preview of all our users.",
+    description: "View a summarized preview of all our users.",
   },
   {
-    title: TitleAccess({ title: "System", role: "any" }),
+    title: "System",
+    role: "any",
     href: "/status",
-    description: "Wanna see whats running under the hood ?",
+    description: "Wanna see what's running under the hood?",
   },
 ];
 
@@ -111,8 +107,8 @@ export function Navbar() {
                       TicketingApp
                     </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                      Dynamic ticketing application made with Nextjs + spring
-                      boot.
+                      Dynamic ticketing application made with Nextjs + Spring
+                      Boot.
                     </p>
                   </Link>
                 </NavigationMenuLink>
@@ -121,7 +117,7 @@ export function Navbar() {
                 Explore the home of TicketingApp.
               </ListItem>
               <ListItem href="/auth/login" title="Login">
-                Already a user ? Login here.
+                Already a user? Login here.
               </ListItem>
               <ListItem href="/auth/signup" title="Signup">
                 Signup to get the most out of TicketingApp.
@@ -138,7 +134,12 @@ export function Navbar() {
               {components.map((component) => (
                 <ListItem
                   key={component.href}
-                  title={component.title}
+                  title={
+                    <TitleWithBadge
+                      title={component.title}
+                      role={component.role}
+                    />
+                  }
                   href={component.href}
                 >
                   {component.description}
@@ -160,6 +161,23 @@ export function Navbar() {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
+  );
+}
+
+interface TitleWithBadgeProps {
+  title: string;
+  role: Role;
+}
+
+function TitleWithBadge({ title, role }: TitleWithBadgeProps) {
+  return (
+    <div>
+      {title}
+      {role === "vendor" && <VendorBadge />}
+      {role === "customer" && <CustomerBadge />}
+      {role === "admin" && <AdminBadge />}
+      {role === "any" && <AnyBadge />}
+    </div>
   );
 }
 
